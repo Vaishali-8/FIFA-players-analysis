@@ -1,0 +1,5836 @@
+
+
+
+mysql> use FIFA;
+Database changed
+mysql> desc fifa;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| id             | int         | YES  |     | NULL    |       |
+| name           | text        | YES  |     | NULL    |       |
+| age            | int         | YES  |     | NULL    |       |
+| nationality    | text        | YES  |     | NULL    |       |
+| overall        | int         | YES  |     | NULL    |       |
+| potential      | int         | YES  |     | NULL    |       |
+| club           | text        | YES  |     | NULL    |       |
+| value          | int         | YES  |     | NULL    |       |
+| wage           | int         | YES  |     | NULL    |       |
+| preferred_foot | text        | YES  |     | NULL    |       |
+| joined         | datetime    | YES  |     | NULL    |       |
+| height         | varchar(10) | YES  |     | NULL    |       |
+| weight         | int         | YES  |     | NULL    |       |
+| penalties      | int         | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+14 rows in set (0.13 sec)
+
+mysql> select count(id) from fifa;
++-----------+
+| count(id) |
++-----------+
+|     16643 |
++-----------+
+1 row in set (0.11 sec)
+
+mysql> select distinct(nationality) from fifa;
++------------------------+
+| nationality            |
++------------------------+
+| Argentina              |
+| Portugal               |
+| Brazil                 |
+| Spain                  |
+| Belgium                |
+| Croatia                |
+| Uruguay                |
+| Slovenia               |
+| Poland                 |
+| Germany                |
+| France                 |
+| England                |
+| Italy                  |
+| Egypt                  |
+| Denmark                |
+| Gabon                  |
+| Wales                  |
+| Senegal                |
+| Costa Rica             |
+| Slovakia               |
+| Netherlands            |
+| Bosnia Herzegovina     |
+| Morocco                |
+| Serbia                 |
+| Algeria                |
+| Austria                |
+| Greece                 |
+| Chile                  |
+| Sweden                 |
+| Colombia               |
+| Korea Republic         |
+| Finland                |
+| Guinea                 |
+| Montenegro             |
+| Armenia                |
+| Switzerland            |
+| Norway                 |
+| Czech Republic         |
+| Scotland               |
+| Ghana                  |
+| Central African Rep.   |
+| DR Congo               |
+| Ivory Coast            |
+| Russia                 |
+| Ukraine                |
+| Iceland                |
+| Mexico                 |
+| Jamaica                |
+| Albania                |
+| Venezuela              |
+| Japan                  |
+| Turkey                 |
+| Ecuador                |
+| Paraguay               |
+| Mali                   |
+| Nigeria                |
+| Cameroon               |
+| Dominican Republic     |
+| Israel                 |
+| Kenya                  |
+| Hungary                |
+| Republic of Ireland    |
+| Romania                |
+| United States          |
+| Cape Verde             |
+| Australia              |
+| Peru                   |
+| Togo                   |
+| Syria                  |
+| Zimbabwe               |
+| Angola                 |
+| Burkina Faso           |
+| Iran                   |
+| Estonia                |
+| Tunisia                |
+| Equatorial Guinea      |
+| New Zealand            |
+| FYR Macedonia          |
+| United Arab Emirates   |
+| China PR               |
+| Guinea Bissau          |
+| Bulgaria               |
+| Kosovo                 |
+| South Africa           |
+| Madagascar             |
+| Georgia                |
+| Tanzania               |
+| Gambia                 |
+| Cuba                   |
+| Belarus                |
+| Uzbekistan             |
+| Benin                  |
+| Congo                  |
+| Mozambique             |
+| Honduras               |
+| Canada                 |
+| Northern Ireland       |
+| Cyprus                 |
+| Saudi Arabia           |
+| Curacao                |
+| Moldova                |
+| Bolivia                |
+| Trinidad & Tobago      |
+| Sierra Leone           |
+| Zambia                 |
+| Chad                   |
+| Philippines            |
+| Haiti                  |
+| Comoros                |
+| Libya                  |
+| Panama                 |
+| S¡œo Tom¡¸ & Pr¡_ncipe |
+| Eritrea                |
+| Oman                   |
+| Iraq                   |
+| Burundi                |
+| Fiji                   |
+| New Caledonia          |
+| Lithuania              |
+| Luxembourg             |
+| Korea DPR              |
+| Liechtenstein          |
+| St Kitts Nevis         |
+| Latvia                 |
+| Suriname               |
+| Uganda                 |
+| El Salvador            |
+| Kuwait                 |
+| Antigua & Barbuda      |
+| Thailand               |
+| Mauritius              |
+| Guatemala              |
+| Liberia                |
+| Kazakhstan             |
+| Niger                  |
+| Mauritania             |
+| Montserrat             |
+| Namibia                |
+| Azerbaijan             |
+| Guam                   |
+| Faroe Islands          |
+| Nicaragua              |
+| Barbados               |
+| Lebanon                |
+| Palestine              |
+| Guyana                 |
+| Sudan                  |
+| Ethiopia               |
+| Puerto Rico            |
+| Grenada                |
+| Jordan                 |
+| Rwanda                 |
+| Bermuda                |
+| Qatar                  |
+| Afghanistan            |
+| Hong Kong              |
+| Andorra                |
+| Belize                 |
+| South Sudan            |
+| Indonesia              |
+| Botswana               |
++------------------------+
+161 rows in set (0.25 sec)
+
+mysql> select  count(*) as freq, nationality from fifa group by nationality order by freq desc limit 3;
++------+-------------+
+| freq | nationality |
++------+-------------+
+| 1475 | England     |
+| 1151 | Germany     |
+|  974 | Spain       |
++------+-------------+
+3 rows in set (0.31 sec)
+
+mysql> select sum(wage) as total_wage,avg(wage) as average_wage,stddev(wage) as standard_deviation from fifa;
++------------+--------------+--------------------+
+| total_wage | average_wage | standard_deviation |
++------------+--------------+--------------------+
+|  160073000 |    9618.0376 | 22262.850062074485 |
++------------+--------------+--------------------+
+1 row in set (0.11 sec)
+
+mysql> select max(wage) as maximum_wage, min(wage) as minimum_wage from fifa;
++--------------+--------------+
+| maximum_wage | minimum_wage |
++--------------+--------------+
+|       565000 |         1000 |
++--------------+--------------+
+1 row in set (0.10 sec)
+
+mysql> select name from fifa where wage=565000;
++----------+
+| name     |
++----------+
+| L. Messi |
++----------+
+1 row in set (0.09 sec)
+
+mysql> select name from fifa where wage=1000;
++-------------------------+
+| name                    |
++-------------------------+
+| M¡‡rio Fernandes        |
+| Taison                  |
+| Marlos                  |
+| V. êÒorluka             |
+| F. Smolov               |
+| B. H¡_wedes             |
+| Manuel Fernandes        |
+| T. Stepanenko           |
+| Ismaily                 |
+| Y. Rakitskyi            |
+| I. Akinfeev             |
+| I. Denisov              |
+| V. Tsygankov            |
+| B. Verbiê?              |
+| R. Zobnin               |
+| Z¡¸ Lu¡_s               |
+| A. Dzagoev              |
+| P. Wernbloom            |
+| J. Farf¡‡n              |
+| Daniel Podence          |
+| A. Selikhov             |
+| Fernando                |
+| B. Natcho               |
+| G. Krychowiak           |
+| Guilherme               |
+| R. Eremenko             |
+| S. Sydorchuk            |
+| A. Pyatov               |
+| A. Prijoviê?            |
+| D. Garmash              |
+| A. Miranchuk            |
+| V. Vasin                |
+| G. Dzhikiya             |
+| Sidcley                 |
+| K. Fortounis            |
+| Jos¡¸ S¡‡               |
+| I. Popov                |
+| M. Livaja               |
+| D. Boyko                |
+| J¡_nior Moraes          |
+| I. Ordets               |
+| O. El Kaddouri          |
+| Andr¡¸ Sim¡æes          |
+| P. Mantalos             |
+| D. Chygrynskyi          |
+| S. Hanni                |
+| S. Bocchetti            |
+| Vieirinha               |
+| S. Kverkvelia           |
+| D. Limbersk¡_           |
+| A. Samedov              |
+| Maur¡_cio               |
+| D. Pelkas               |
+| Varela                  |
+| S. Gigot                |
+| L. Christodoulopoulos   |
+| L¡¸o Matos              |
+| M. Stoch                |
+| M. Koz¡‡ê?ik            |
+| E. Dilaver              |
+| D. Tarasov              |
+| Alan Patrick            |
+| T. K¡‡d¡‡r              |
+| Dani Olmo               |
+| K. Billiat              |
+| A. Mounier              |
+| A. Hern¡‡ndez           |
+| S. Kryvtsov             |
+| Guilherme               |
+| G. Schennikov           |
+| M. Morozyuk             |
+| B. Butko                |
+| ¡?der                   |
+| O. Elabdellaoui         |
+| K. Kanga                |
+| J. Ananidze             |
+| A. Paschalakis          |
+| J. Vukoviê?             |
+| V. Ignatiev             |
+| V. Buyalskyi            |
+| M. Krmenê?¡_k           |
+| D. Biseswar             |
+| N. Vla?‡iê?             |
+| Tch¡Ô Tch¡Ô             |
+| D. Glushakov            |
+| Jos¡¸ Ca¡ñas            |
+| T. Souê?ek              |
+| I. Fetfatzidis          |
+| Guerrero                |
+| D. Kol¡‡?¯              |
+| A. Bê?lutê?             |
+| Y. Khacheridi           |
+| R. Rey                  |
+| A. Ademi                |
+| I. Kutepov              |
+| J. Pivariê?             |
+| W. Katsande             |
+| T. Mykhalyk             |
+| A. Hassan               |
+| V. Kovalenko            |
+| N. Hult                 |
+| O. Kayode               |
+| D. Kourmpelis           |
+| S. Deli                 |
+| Crespo                  |
+| Vitor Bueno             |
+| A. Besedin              |
+| K. Th¡¸ophile-Catherine |
+| A. Gianniotis           |
+| L. Melgarejo            |
+| M. Burda                |
+| A. Miranchuk            |
+| J. Hu?‡bauer            |
+| V. Barkas               |
+| A. Eschenko             |
+| Dentinho                |
+| T. Kê¯dziora            |
+| R. Hubn¡_k              |
+| N. Stanciu              |
+| A. Rebrov               |
+| Rodrigo Galo            |
+| J. ?‘ural               |
+| J. Kopic                |
+| P. Hro?‡ovsk¡_          |
+| J. Bo?¯il               |
+| Pedro Rocha             |
+| M. Gavranoviê?          |
+| A. Bakasetas            |
+| T. Ho?¯ava              |
+| H. Magn¡_sson           |
+| M. Ngadeu-Ngadjui       |
+| V. Shepelev             |
+| T. Matlaba              |
+| M. ?‘koda               |
+| K. Nababkin             |
+| F. Pardo                |
+| H¡¸lder Lopes           |
+| A. Tashaev              |
+| J. Kova?¯¡_k            |
+| V. Torosidis            |
+| M. Rybus                |
+| V. Coufal               |
+| N. Karelis              |
+| J. Zmrhal               |
+| D. Livakoviê?           |
+| B. Parker               |
+| Wellington Nem          |
+| M. Bakakis              |
+| D. Khocholava           |
+| L. Castro               |
+| P. Ciss¡¸               |
+| O. Zahustel             |
+| E. Ponce                |
+| M. Makola               |
+| S. Dioudis              |
+| A. Mobara               |
+| R. ?™ezn¡_k             |
+| L. Boy¡¸                |
+| J. Jugas                |
+| D. Kombarov             |
+| E. Ins¡_a               |
+| M. Johansson            |
+| A. Warda                |
+| D. Limnios              |
+| M. Malyshev             |
+| M. Shaparenko           |
+| A. Shabanov             |
+| L. ?‘tetina             |
+| A. Hru?‡ka              |
+| M. Oikonomou            |
+| P. Stojanoviê?          |
+| Maycon                  |
+| M. Camara               |
+| M. Zeman                |
+| P. Olayinka             |
+| T. Ben Haim             |
+| U. êÒosiê?              |
+| M. Or?‡iê?              |
+| M. ?‘itum               |
+| T. Doumbia              |
+| L. Koutris              |
+| Erik Mor¡‡n             |
+| M. Le?‡koviê?           |
+| F. Chalov               |
+| D. Kolovetsios          |
+| F. Macheda              |
+| Rodrigo Bec¡œo          |
+| K. Tsimikas             |
+| E. Mathoho              |
+| M. Nyatama              |
+| L. Majer                |
+| P. Glykos               |
+| L. Hejda                |
+| D. Mu¡ñoz               |
+| L¡¸o Jab¡‡              |
+| Y. Meriah               |
+| S. Malezas              |
+| L. Pokorn¡_             |
+| O. Danchenko            |
+| I. Oblyakov             |
+| Roderick Miranda        |
+| R. Mphahlele            |
+| N. Leiva                |
+| B. Petkoviê?            |
+| E. Ka¡_e                |
+| S. Plav?‡iê?            |
+| D. KêŸdzior             |
+| A. Bouchalakis          |
+| O. Coulibaly            |
+| F. Nita                 |
+| Y. Shakhov              |
+| K. Galanopoulos         |
+| A. Kolomeytsev          |
+| J. S¡_kora              |
+| V. Kadlec               |
+| D. Zuma                 |
+| D. L¡¸v¡Ôque            |
+| A. Rrahmani             |
+| N. Moro                 |
+| A. Mê??œel              |
+| A. Timofeev             |
+| A. Totovytskyi          |
+| G. Gianniotas           |
+| N. Carre¡ño             |
+| A. Chipciu              |
+| M. Casierra             |
+| O. Shevchenko           |
+| E. Arango               |
+| S. Kaya                 |
+| M. Duelund              |
+| G. G¡_mez               |
+| M. Budimir              |
+| Alef                    |
+| M. Matvienko            |
+| A. Chatzigiovanis       |
+| A. Rudko                |
+| Fernando                |
+| D. Rodr¡_guez           |
+| K. Mahachi              |
+| M. Petr?_ela            |
+| C. Quintero             |
+| B. Khuzwayo             |
+| M. van Buren            |
+| V. Lampropoulos         |
+| G. Giakoumakis          |
+| M. Leovac               |
+| C. Nhamoinesu           |
+| I. Hajroviê?            |
+| S. Kitsiou              |
+| J. Villota              |
+| L. Manyama              |
+| V. Kalitvintsev         |
+| S. Tecl                 |
+| J. Quintero             |
+| Y. Cabrera              |
+| A. Gojak                |
+| I. ?‘unjiê?             |
+| U. Radakoviê?           |
+| M. Havel                |
+| A. Rivas                |
+| E. Oikonomou            |
+| L. Choutesiotis         |
+| O. K¡_dela              |
+| G. Maluleka             |
+| D. Bernhardt            |
+| J. Malag¡_n             |
+| B. Idowu                |
+| V. Klonaridis           |
+| O. Altman               |
+| M. Petkoviê?            |
+| M. Mier                 |
+| D. ¡?lvarez             |
+| L. V¡‡squez             |
+| K. Bistroviê?           |
+| A. Montero              |
+| C. Akpom                |
+| L. Vel¡‡zquez           |
+| C. Arrieta              |
+| M. Frydrych             |
+| N. Chernov              |
+| R. Zapata               |
+| L. Pernica              |
+| D. Monsalve             |
+| P. Tsintotas            |
+| M. Riquero              |
+| O. Kol¡‡?¯              |
+| J. P¡¸rez               |
+| W. Sandilands           |
+| P. Rojas                |
+| C. Can¡_o               |
+| D. Gonz¡‡lez            |
+| D. Zagorac              |
+| D. Vald¡¸s              |
+| S. Moharrami            |
+| M. N¡_¡ñez              |
+| A. To?“ca               |
+| R. Tavera               |
+| S. Bolbat               |
+| A. Vasyutin             |
+| Yoon Bo Sang            |
+| E. Palomeque            |
+| Alcatraz                |
+| I. Akhmetov             |
+| D. Novoa                |
+| L. Ospina               |
+| R. J¡¸rez               |
+| P. Mina                 |
+| J. Brinkies             |
+| S. Ruprecht             |
+| T. Margasov             |
+| S. Ntshangase           |
+| A. Pomini               |
+| D. Manos                |
+| Rafinha                 |
+| A. Kochenkov            |
+| J. Mahecha              |
+| C. Mu¡ñoz               |
+| G. Bushchan             |
+| A. Mulenga              |
+| M. Fr¡_dek              |
+| C. Bejarano             |
+| H. Osorio               |
+| G. Bouzoukis            |
+| A. Correa               |
+| H. Mosquera             |
+| C. Alz¡‡te              |
+| E. Segura               |
+| M. S¡‡ê?ek              |
+| L. ¡?lvarez             |
+| S. Tonali               |
+| Jos¡¸ Juan              |
+| K. Mahlasela            |
+| M. Lysov                |
+| J. Matou?‡ek            |
+| C. Donis                |
+| C. Gonzalez             |
+| G. P¡‡ez                |
+| A. Androutsos           |
+| D. Mart¡_nez            |
+| J. Mabokgwane           |
+| J. Gamonal              |
+| D. Giraldo              |
+| G. Saunders             |
+| T. Lorch                |
+| L. Memela               |
+| A. Campbell             |
+| A. Vargas               |
+| A. Gasbarro             |
+| A. Rodriguez            |
+| R. Torres               |
+| O. Albornoz             |
+| H. Rivera               |
+| L. Menalo               |
+| R. Naranjo              |
+| F. Rodr¡_guez           |
+| T. H¡‡jek               |
+| D. Z¡_¡ñiga             |
+| L. Za??uska             |
+| D. Vergara              |
+| A. Maksimenko           |
+| M. Vrushaj              |
+| Rudy                    |
+| C. Shields              |
+| F. N¡‡jera              |
+| R. Zhemaletdinov        |
+| P. Zulu                 |
+| C. Arias                |
+| K. Kotsaris             |
+| L. Arias                |
+| K. Arkivuo              |
+| G. Maggiore             |
+| K. Broll                |
+| B. De Alba              |
+| T. Geyer                |
+| Serginho                |
+| C. Durkin               |
+| J. Roa                  |
+| D. Cardoso              |
+| J. ¡?ngulo              |
+| A. Zapata               |
+| G. Masouras             |
+| B. Vê?tê?jelu           |
+| C. Albanis              |
+| F. Holthaus             |
+| P. Izzo                 |
+| M. Starke               |
+| J. Mi¡ño                |
+| K. Kuchaev              |
+| J. Shonga               |
+| X. Mlambo               |
+| O. Andrievskyi          |
+| J. Murillo              |
+| N. Rubio                |
+| G. Villagra             |
+| M. Pr¡¸vot              |
+| N¡¸stor Albiach         |
+| C. Espinosa             |
+| T. Tzandaris            |
+| J. Hern¡‡ndez           |
+| J. Zuluaga              |
+| S. Traut                |
+| L. Belingheri           |
+| R. Fennell              |
+| T. Wachsmuth            |
+| C. Fl¡_rez              |
+| J. V¡‡squez             |
+| M. Svilar               |
+| F. Saavedra             |
+| S. Pasa                 |
+| A. Mbekile              |
+| S. Singh                |
+| J. Monreal              |
+| E. Palomino             |
+| W. Pacheco              |
+| L. Delgado              |
+| L. Rol¡_n               |
+| J. De la Cuesta         |
+| O. V¡‡squez             |
+| N. Palacios             |
+| D. Efremov              |
+| D. Nikolaou             |
+| M. Vigorito             |
+| N. Ramos                |
+| C. Del Grosso           |
+| C. Lizarazo             |
+| L. Cabezas              |
+| A. Bussaglia            |
+| L. Copete               |
+| Neto Borges             |
+| D. Frare                |
+| T. Chalobah             |
+| A. Straith              |
+| Y. Rivera               |
+| E. Correa               |
+| H. Pertuz               |
+| M. Albertazzi           |
+| D. Adorni               |
+| V. Rankoviê?            |
+| R. Pirrello             |
+| F. Kurto                |
+| A. Witry                |
+| P. Kov¡‡?¯              |
+| C. Dajome               |
+| M. Piossek              |
+| D. Herner               |
+| M. Hil¡“ner             |
+| E. Lancini              |
+| R. ¡Ÿhman Persson       |
+| B. Manu                 |
+| A. Angoula              |
+| M. Ricci                |
+| K. Andersen             |
+| K. Hidalgo              |
+| L. Reis                 |
+| L. Angulo               |
+| E. Domaschke            |
+| T. van de Looi          |
+| E. Farias               |
+| B. Kne?_eviê?           |
+| Y. Anchico              |
+| F. Cosenza              |
+| M. B¡_r                 |
+| M. Schr¡_ter            |
+| L. V¡‡cha               |
+| D. Frick                |
+| E. Godoy                |
+| A. Angulo               |
+| L. Cabrera              |
+| T. Leugers              |
+| D. Cappelletti          |
+| D. Murillo              |
+| F. Proia                |
+| D. Balanta              |
+| L. Montip¡_             |
+| D. Barinov              |
+| Y. Gonz¡‡lez            |
+| E. Caicedo              |
+| N. Douchez              |
+| C. Carrillo             |
+| D. Palacios             |
+| A. Baclet               |
+| L. Escorcia             |
+| D. Biê?¡_k              |
+| N. Vergos               |
+| F. Perucchini           |
+| G. Kharaishvili         |
+| Diogo Costa             |
+| G. Koyalipou            |
+| N. Proschwitz           |
+| S. Gannon               |
+| R. Lange                |
+| Jaj¡‡                   |
+| J. Elsey                |
+| L. Strizzolo            |
+| L. Martinelli           |
+| N. Spalek               |
+| N. Madonna              |
+| M. Busellato            |
+| M. Stein                |
+| R. Eckardt              |
+| P. Funk                 |
+| N. Ravaglia             |
+| N. Pe¡ñailillo          |
+| Magno Novaes            |
+| C. Ayala                |
+| E. Ndoj                 |
+| R. Vodi?‡ek             |
+| S. Scappini             |
+| J. Byrne                |
+| K. Pannewitz            |
+| H. Patronen             |
+| S. Adekugbe             |
+| D. Rangelov             |
+| H. Zapata               |
+| M. R¡_os                |
+| J. G¡_mez               |
+| R. Caballero            |
+| T. Mavromatis           |
+| K. B¡_low               |
+| M. Ballmert             |
+| N. Manfredini           |
+| V. Pule                 |
+| M. Rubin                |
+| Y. Akimoto              |
+| J. Duma                 |
+| Kim Yong Dae            |
+| J. Zelen¡_              |
+| J. Moreno               |
+| H. Rivero               |
+| I. Lanni                |
+| F. Castillo             |
+| B. Castillo             |
+| V. Retamal              |
+| L. Paz                  |
+| B. Tetteh               |
+| J. Vela                 |
+| L. Salda¡ña             |
+| M. Drudi                |
+| M. Pulkrab              |
+| T. Bergmann             |
+| C. Guerra               |
+| Isidoro                 |
+| J. Abarca               |
+| S. Branca               |
+| N. Antonitsch           |
+| D. Lowe                 |
+| C. Doucour¡¸            |
+| M. Me?‡anoviê?          |
+| D. Thopola              |
+| G. Sandoval             |
+| S. Mpontshane           |
+| L. Lezzerini            |
+| M. Yaghoubi             |
+| M. H¡?ibr¡®ten          |
+| R. Vanegas              |
+| L. Crecco               |
+| R. Benson               |
+| R. Riski                |
+| T. Charles              |
+| M. Odjer                |
+| T. Zhamaletdinov        |
+| M. Mikiê?               |
+| I. Lapshov              |
+| B. Jayiya               |
+| Y. Hurtado              |
+| M. Booysen              |
+| M. Restrepo             |
+| A. Paleari              |
+| Dani Mart¡_n            |
+| J. Becerra              |
+| C. Ejuke                |
+| M. Palacios             |
+| A. Zapata               |
+| A. Trusty               |
+| M. Oesterhelweg         |
+| D. Mignanelli           |
+| T. Gabuza               |
+| J. Aguirre              |
+| M. Ogbu                 |
+| G. Malcore              |
+| M. Saeid                |
+| E. Barli                |
+| A. Balijon              |
+| A. Ligi                 |
+| L. Vignali              |
+| M. K¡_nnecke            |
+| M. Fornasier            |
+| N. Rusyn                |
+| Gu Sung Yun             |
+| Lee Chang Geun          |
+| I. Rondanini            |
+| J. R¡_os                |
+| N. Topor-Stanley        |
+| A. Dobos                |
+| N. Granatowski          |
+| L. Pavez                |
+| S. Rom¡‡n               |
+| T. Kupisz               |
+| C. Amaya                |
+| C. Renter¡_a            |
+| A. Mannus               |
+| P. Jaeckel              |
+| J. Bijol                |
+| D. Pedersen             |
+| S. O'Donnell            |
+| Marquinhos Cipriano     |
+| M. McKenzie             |
+| J. Deumeland            |
+| V. Vries                |
+| M. Mosquera             |
+| T. Wendel               |
+| O. Schnitzler           |
+| A. Coly                 |
+| M. Ajani                |
+| K. Ciss¡¸               |
+| D. Castillo             |
+| M. Schulze Niehues      |
+| J. Mosquera             |
+| F. Viteritti            |
+| N. Busch Thor           |
+| D. Ovono                |
+| M. Pascali              |
+| D. Mungo                |
+| G. Wegkamp              |
+| A. Gersbach             |
+| You Ju An               |
+| M. Tacalfred            |
+| A. Otero                |
+| Kim Jin Ya              |
+| L. Narv¡‡ez             |
+| N. Sonko Sundberg       |
+| T. Bo?_iê?              |
+| H. Salinas              |
+| S. Avellaneda           |
+| F. ¡?vila               |
+| A. ê‰erm¡‡k             |
+| A. Ba                   |
+| U. Moses Ekpai          |
+| R. Proch¡‡zka           |
+| M. Pepiê?               |
+| M. Gebers               |
+| S. Gomez                |
+| Omar Santana            |
+| J. Deschamps            |
+| P. Haglund              |
+| P. Jerez                |
+| W. Ponce                |
+| J. Reimerink            |
+| D. Georgievski          |
+| L. Escalante            |
+| A. Keita                |
+| Ham Seok Min            |
+| M. Sol¡_s               |
+| D. Merelli              |
+| C. Bickel               |
+| D. Marcandella          |
+| A. Barylla              |
+| M. Firenze              |
+| I. Maela                |
+| R. Taylor               |
+| M. Fofana               |
+| Juan C¡‡mara            |
+| R. Scheu                |
+| C. Giraldo              |
+| G. Cros                 |
+| A. Ouahim               |
+| T. Hadebe               |
+| L. P¡¸rez               |
+| Y. Marillat             |
+| E. T¡?nne               |
+| A. Hinestroza           |
+| E. Pezzi                |
+| E. Serje                |
+| M. Biankadi             |
+| M. Kleinsorge           |
+| M. D¡‡vila              |
+| L. Rajot                |
+| C. Palomeque            |
+| T. Rehfeldt             |
+| I. Traor¡¸              |
+| F. S¡‡nchez             |
+| K. Ceesay               |
+| L. K¡_nigshofer         |
+| Lu¡_s Maximiano         |
+| H. Skogseid             |
+| J. Balkovec             |
+| K. Wrzesi??ski          |
+| D. Torres               |
+| E. Pern¡_a              |
+| S. Gnaka                |
+| Y. Bourhane             |
+| J. Petriccione          |
+| J. ?™ezn¡_ê?ek          |
+| G. Acampora             |
+| L. Ferguson             |
+| R. Augustyniak          |
+| O. Garc¡_a              |
+| H. Jele                 |
+| B. Finne                |
+| J. Duque                |
+| B. Renneke              |
+| F. Fl¡_rez              |
+| S. Salviato             |
+| Choi Kyu Baek           |
+| M. Giannikoglou         |
+| V. Demidov              |
+| S. Tronstad             |
+| A. Figueroa             |
+| M. Bl¡‡zquez            |
+| G. Sep¡_lveda           |
+| R. Aponz¡‡              |
+| S. Lo Faso              |
+| D. Bassi                |
+| S. Floranus             |
+| S. Olsson               |
+| L. Nielsen              |
+| V. Supriaga             |
+| C. Starfelt             |
+| S. Narazaki             |
+| J. Bothroyd             |
+| A. Longhi               |
+| G. Fechner              |
+| Yoon Bit Garam          |
+| G. Melkadze             |
+| N. Nyauza               |
+| A. Sabbione             |
+| J. Mez¡_                |
+| C. Jopia                |
+| Francisco J¡_nior       |
+| A. Hanche-Olsen         |
+| S. Romero               |
+| R. Shindo               |
+| G. Gigliotti            |
+| G. Carpani              |
+| M. de Fockert           |
+| S. Madden               |
+| P. Sontheimer           |
+| J. Guillermo            |
+| M. Dyrestam             |
+| H. Dahmani              |
+| F. Knudsen              |
+| J. Cano                 |
+| J. Washausen            |
+| L. Ghiringhelli         |
+| J. Reinhardt            |
+| K. Matsubara            |
+| M. Fellah               |
+| O. Ba                   |
+| H. Ekstein              |
+| T. Cancellotti          |
+| L. Tipton               |
+| N. Medvedev             |
+| A. Annan                |
+| A. Fukumori             |
+| J. Toivio               |
+| M. Bruccini             |
+| K. Veendorp             |
+| S. Kikuchi              |
+| L. Gonz¡‡lez            |
+| S. Calvano              |
+| L. Giovini              |
+| E. Flores               |
+| A. Hopmark              |
+| K. Moleko               |
+| S. Fujita               |
+| R. K¡_nig               |
+| S. Lundholm             |
+| G. Perea                |
+| J. Rodr¡_guez           |
+| L. Fiordilino           |
+| L. Verna                |
+| F. Silva                |
+| Pit¡¸                   |
+| Marquitos               |
+| K. Bakêñrcêñoê“lu       |
+| K. Haraldseid           |
+| Y. Mena                 |
+| W. Eskelinen            |
+| L. Di Matteo            |
+| C. Mancilla             |
+| F. Vi¡‡fara             |
+| C. Giousis              |
+| Iv¡‡n M¡‡rquez          |
+| E. C¡_rdoba             |
+| T. Augello              |
+| A. Kampetsis            |
+| I. Zotko                |
+| M. Dube                 |
+| M. V¡‡zquez             |
+| L. Mosquera             |
+| H. Opdal                |
+| A. Palacios             |
+| E. K¡_ck                |
+| F. Ponce                |
+| N. Miatke               |
+| A. Gerbo                |
+| G. Cummins              |
+| Maicon                  |
+| M. McKay                |
+| K. Tokstad              |
+| V. Agardius             |
+| K. Osorio               |
+| N. Sessa                |
+| G. Morrissey            |
+| J. Dall'Oglio           |
+| G. Beretta              |
+| J. C¡_rdoba             |
+| S. Monaco               |
+| M. Rahn                 |
+| C. Vergara              |
+| Y. Rokutan              |
+| T. Danneberg            |
+| M. Gostomski            |
+| R. Klingenburg          |
+| A. Hoole                |
+| M. Heyer                |
+| Y. Opazo                |
+| R. Atassi               |
+| E. Bj¡_rkander          |
+| E. Abedini              |
+| D. Giorico              |
+| E. Moreno               |
+| P. Malarczyk            |
+| V. Bergan               |
+| D. Okereke              |
+| A. Bischoff             |
+| M. Bakenga              |
+| D. Berntsen             |
+| Y. Hiraoka              |
+| J. Teunckens            |
+| M. Torres               |
+| K. Oiwa                 |
+| J. Ram¡_rez             |
+| Z. Jovanovic            |
+| D. Islamovic            |
+| E. Ekpolo               |
+| E. Huth                 |
+| R. Steer                |
+| M. Bravo                |
+| N. Neidhart             |
+| E. Pantelakis           |
+| D. Vr?_ogiê?            |
+| F. Bj¡_rk¡¸n            |
+| J. Williams             |
+| P. Zieli??ski           |
+| F. Alastra              |
+| Y. Andia                |
+| J. Mart¡_nez            |
+| A. Obispo               |
+| J. Colman               |
+| M. Adams                |
+| G. Zampano              |
+| Y. D¡_az                |
+| T. Gebauer              |
+| F. Torgnascioli         |
+| M. Vitzthum             |
+| O. ¡_zdemir             |
+| P. Staikos              |
+| R. Cepeda               |
+| S. Londo¡ño             |
+| G. Ruggiero             |
+| M. Legittimo            |
+| C. Mueller              |
+| R. Hayasaka             |
+| J. Marim¡_n             |
+| F. Bechtholdt           |
+| A. Fukuta               |
+| A. Carleton             |
+| J. Szmatu??a            |
+| M. Perdijiê?            |
+| T. Nishimura            |
+| Andr¡¸ Sousa            |
+| C. Gustafsson           |
+| J. Arvidsson            |
+| Cidinho                 |
+| Marcelo Freitas         |
+| B. Jopek                |
+| M. Zimmer               |
+| L. Geertruida           |
+| S. Svarnas              |
+| S. Mamba                |
+| E. Galekovic            |
+| L. Schnellbacher        |
+| Lee Yun Pyo             |
+| J. Cano                 |
+| K. Rend¡_n              |
+| R. Iio                  |
+| S. Rudol                |
+| M. Cebula               |
+| L. Gonnelli             |
+| Y. Demoncy              |
+| Bruno Silva             |
+| D. Periê?               |
+| G. Mart¡_nez            |
+| J. Garc¡_a              |
+| D. Perquis              |
+| Hong Jeong Un           |
+| G. Loiacono             |
+| J. Aguirre              |
+| D. Niepsuj              |
+| F. Kastrati             |
+| B. Uaferro              |
+| A. St¡?l¡®s             |
+| S. Roa                  |
+| M. Heinloth             |
+| A. Aremu                |
+| A. Dozzell              |
+| C. Masuda               |
+| G. Kongshavn            |
+| R. Raveloson            |
+| C. Rojas                |
+| Ko Seul Ki              |
+| M. Campos               |
+| G. Rivas                |
+| L. Luna                 |
+| P. Schorr               |
+| E. Zambataro            |
+| N. Rasskazov            |
+| A. Lomovitskiy          |
+| O. ¡?lvarez             |
+| M. Ingebrigtsen         |
+| N. Bertocchi            |
+| A. Camigliano           |
+| U. Saltnes              |
+| M. Ngombo               |
+| P. Jerez                |
+| D. Watts                |
+| M. Seegert              |
+| G. Mebrahtu             |
+| V. Screciu              |
+| D. Massey               |
+| J. Augustinsson         |
+| J. Hamilton             |
+| M. Wagner               |
+| M. êÒosiê?              |
+| P. Charruau             |
+| A. Ariano               |
+| M. Di Piazza            |
+| B. Fern¡‡ndez           |
+| S. Leyton               |
+| P. M¡_ller              |
+| I. Jukiê?               |
+| J. Cox                  |
+| D. Parra                |
+| J. Vidoviê?             |
+| B. McNamee              |
+| J. Aspropotamitis       |
+| M. Ristiê?              |
+| C. Agnelli              |
+| M. Exslager             |
+| A. Noppert              |
+| N. Gil                  |
+| G. Puel                 |
+| E. Johansen             |
+| F. Moufi                |
+| M. Wolfram              |
+| K. Ward                 |
+| L. H¡_gg-Johansson      |
+| V. Jalasto              |
+| C. Cuesta               |
+| J. Nilsson              |
+| R. S¡‡nchez             |
+| A. Moreno               |
+| C. Greger               |
+| A. Sigur¡µsson          |
+| O. Kiomourtzoglou       |
+| N. Tapia                |
+| T. D'Orazio             |
+| I. Marconi              |
+| C. Rivera               |
+| K. Shirai               |
+| L. L¡_pez               |
+| K. Yeboah               |
+| M. Wdowiak              |
+| P. Karlsson Lagemyr     |
+| F. Hurtado              |
+| J. Hromada              |
+| D. Payne                |
+| J. Lillis               |
+| F. Torres               |
+| A. Bruno                |
+| M. Biskupoviê?          |
+| P. Leciejewski          |
+| A. Askar                |
+| F. Schiller             |
+| D. Myrestam             |
+| J. Rivas                |
+| S. B¡_sel               |
+| S. Schiek               |
+| M. Cort¡¸s              |
+| O. Kurt                 |
+| C. Psych¡¸              |
+| F. Tchenkoua            |
+| A. Melgalvis            |
+| K. Eisele               |
+| D. Gonz¡‡lez            |
+| Edu Frias               |
+| J. Gundersen            |
+| N. Landgraf             |
+| T. M¡_ller              |
+| J. Al-Hazaimeh          |
+| M. Suzuki               |
+| M. Amundsen             |
+| A. Tarbell              |
+| M. Sarr                 |
+| M. Schulze              |
+| Borja Llarena           |
+| H. Lingani              |
+| G. Torromino            |
+| C. Johnson              |
+| I. Savane               |
+| Kim Jungya              |
+| M. Karlsen              |
+| D. Stec                 |
+| V. Selimoviê?           |
+| R. Mel¡¸ndez            |
+| J. Valencia             |
+| M. D'Arpino             |
+| M. S¡_derqvist          |
+| S. Eremenko             |
+| E. Wahlstr¡_m           |
+| A. Blomqvist            |
+| D. Gnaase               |
+| B. Richards-Everton     |
+| D. Stanese              |
+| V. Vukadinoviê?         |
+| Echu                    |
+| M. Munetsi              |
+| K. Antonsen             |
+| D. Williams             |
+| A. Po¡_ngouras          |
+| K. Sheppard             |
+| C. Morrison             |
+| D. L¡_pez               |
+| F. Menig                |
+| D. Fox                  |
+| Y. Shimada              |
+| T. Sugeno               |
+| J. Palacios             |
+| R. Sandberg             |
+| Choi Jong Hoan          |
+| K. Roberts              |
+| S. Ngezana              |
+| P. Vranjic¡‡n           |
+| L. Santelices           |
+| R. Harakawa             |
+| M. Schwabl              |
+| J. J¡_nsson             |
+| A. Rabillard            |
+| L. Del Pinto            |
+| M. van Bergen           |
+| A. Ingegneri            |
+| F. Rom¡‡n               |
+| O. Kittner              |
+| M. L¡_pez               |
+| A. Winkler              |
+| S. Kamata               |
+| G. Shitolo              |
+| D. Slamar               |
+| M. Gustafsson           |
+| Jo¡œo Mendes            |
+| N. Siega                |
+| F. Reynero              |
+| Y. Kawai                |
+| C. Salda¡ña             |
+| Z. Udoviê?iê?           |
+| M. Musaka               |
+| R. Takeuchi             |
+| N. Atkinson             |
+| A. Cadavid              |
+| B. Karamoko             |
+| M. K¡_nigs              |
+| A. Corsi                |
+| J. Calle                |
+| R. Takasugi             |
+| B. Moe                  |
+| S. Dom¡_nguez           |
+| J. Nilsen               |
+| P. Breier               |
+| N. Castrill¡_n          |
+| ¡?lex Craninx           |
+| H. Onaga                |
+| A. Otero                |
+| D. Undav                |
+| N. Losada               |
+| M. Vel¡‡squez           |
+| E. Valencia             |
+| H. Cochrane             |
+| B. Stuver               |
+| V. Loro¡ña              |
+| A. Danch                |
+| D. Telgenkamp           |
+| P. Polczak              |
+| K. Scherpen             |
+| M. Duke                 |
+| F. Portillo             |
+| J. Carbonero            |
+| B. Pintol               |
+| K. Kato                 |
+| S. Kobayashi            |
+| S. Mai                  |
+| L. Riveros              |
+| J. Riquett              |
+| A. Razak                |
+| F. Downes               |
+| M. Stoll                |
+| D. Yearwood             |
+| C. Patterson-Sewell     |
+| M. Jeannin              |
+| G. Walusimbi            |
+| I. Chatzitheodoridis    |
+| O. Rathbone             |
+| S. Vecchia              |
+| D. Londo¡ño             |
+| L¡¸o Pr¡_ncipe          |
+| R. Becker               |
+| Song Bum Keun           |
+| Gon¡_alo Cardoso        |
+| C. McCormack            |
+| C. P¡¸rez               |
+| F. Ayaz                 |
+| F. Helstrup             |
+| M. Done                 |
+| T. Oude Kotte           |
+| J. Fehr                 |
+| Diogo Silva             |
+| M. Sep¡_lveda           |
+| S. Rafn                 |
+| N. Burns                |
+| G. Arokoyo              |
+| V. Sakor                |
+| F. Garc¡_a              |
+| K. Kabran               |
+| K. Madsen               |
+| J. O'Brien              |
+| D. Kvande               |
+| J. Tveita               |
+| Kikas                   |
+| A. Foosn¡_s             |
+| M. Minesso              |
+| A. ¡_zer                |
+| B. Gartland             |
+| P. Frascatore           |
+| H. Lopes                |
+| T. Lebeau               |
+| H. Bwana                |
+| C. Camps                |
+| A. Langlitz             |
+| P. Soto                 |
+| J. Buitrago             |
+| Gabriel Nunes           |
+| T. Doyle                |
+| N. Zanellato            |
+| ¡?lex Dom¡_nguez        |
+| M. Satli                |
+| M. Fujita               |
+| L. Nilsen               |
+| S. Mensiro              |
+| L. Trejo                |
+| O. S¡_derberg           |
+| A. Arrigoni             |
+| K. Nakamura             |
+| B. Kantarovski          |
+| N. Ishikawa             |
+| C. L¡_pez               |
+| T. Regan                |
+| Nuno Macedo             |
+| Woo Chan Yang           |
+| Jo¡œo Tavares           |
+| D. Da Costa             |
+| F. Piasecki             |
+| A. Torralvo             |
+| S. Hoare                |
+| A. Durante              |
+| Salva Ferrer            |
+| Pau Morer               |
+| Y. Tokunaga             |
+| J. Sellars              |
+| J. Hammar               |
+| K. Nagato               |
+| H. Hallberg             |
+| E. Restrepo             |
+| S. Tomita               |
+| J. Barboza              |
+| S. Chilunda             |
+| N. Rebolledo            |
+| G. Lillard              |
+| M. Mi?_kiewicz          |
+| Y. Asprilla             |
+| D. Bj¡_rnquist          |
+| G. Panico               |
+| E. Loiodice             |
+| A. Spahic               |
+| S. Hatanaka             |
+| Neto                    |
+| L. Schl¡_ter            |
+| D. Djulbic              |
+| J. Matuwila             |
+| A. Wilbraham            |
+| P. Mr¡‡z                |
+| C. Pain                 |
+| T. Eriksson             |
+| B. Roche                |
+| R. S¡‡nchez             |
+| J. Mosquera             |
+| P. Lima                 |
+| P. Cappelluzzo          |
+| J. Mucha                |
+| L. Campana              |
+| B. Miranda              |
+| Y. Thermann             |
+| K. Weidlich             |
+| Endika                  |
+| Miguel Lu¡_s            |
+| ¡?ngel                  |
+| D. Franco               |
+| O. Pehrsson             |
+| J. Monroy               |
+| K. Ntlhe                |
+| J. Escobar              |
+| M. Farfan               |
+| Borja                   |
+| A. Affane               |
+| O. K¡_k¡_¡_             |
+| I. Pomazun              |
+| I. Vujica               |
+| J. Palacios             |
+| I. Sirelius             |
+| J. Mvondo               |
+| W. Evseev               |
+| A. Mosquera             |
+| A. Danzi                |
+| J. G¡_mez               |
+| J. Kerr                 |
+| N. Mileusniê?           |
+| P. Ulvestad             |
+| M. Pe?‡koviê?           |
+| F. Salinas              |
+| L. Kalludra             |
+| J. Bartosz              |
+| Kim Dae Won             |
+| N. Alho                 |
+| R. Dom¡_nguez           |
+| M. B¡_y¡_ksakarya       |
+| J. Ramos                |
+| J. Lindberg             |
+| N. J¡_llich             |
+| D. H??adun              |
+| E. Gonz¡‡lez            |
+| D. L¡¸on                |
+| B. Niasse               |
+| R. Serena               |
+| Valdu T¡¸               |
+| D. Smuga                |
+| M. Aceval               |
+| Arribas                 |
+| L. Tankulic             |
+| C. Tirard               |
+| B. Mbeumo               |
+| M. M¡_ld¡_r             |
+| D. G¡_mez               |
+| E. B¡?rufsen            |
+| R. Contreras            |
+| G. Bartczak             |
+| D. Valencia             |
+| A. Kokoszka             |
+| E. Gyasi                |
+| J. Lewis                |
+| J. McCrary              |
+| Z. Arseniê?             |
+| P. Engblom              |
+| A. Mucolli              |
+| D. Ernst                |
+| N. Rieble               |
+| J. McGrath              |
+| M. Andersen             |
+| E. Calvillo             |
+| L. Soares               |
+| Yoo Hyun                |
+| T. Jacobsen             |
+| Jeon Se Jin             |
+| J. Carolina             |
+| C. K¡_llqvist           |
+| J. Mu¡ñoz               |
+| B. Vazquez              |
+| F. Kanoute              |
+| M. Ram¡_rez             |
+| M. Chinellato           |
+| I. Lawlor               |
+| T. D¡_hne               |
+| G. Lefebvre             |
+| T. Worra                |
+| D. Hashioka             |
+| H. G¡_mez               |
+| T. Zwarthoed            |
+| M. Maro?‡i              |
+| J. Tamimi               |
+| C. ¡_zkan               |
+| S. Furtado              |
+| Carlos Cordero          |
+| M. Collao               |
+| S. Ring                 |
+| S. M¡_ller              |
+| C. D¡_az                |
+| S. Ambrosius            |
+| B. Gaul                 |
+| D. Cleary               |
+| V. Lia                  |
+| Kim Dae Jung            |
+| J. Gerlach              |
+| O. Storflor             |
+| M. Ovenstad             |
+| F. Di Mariano           |
+| B. Sylvestre            |
+| Juan P¡¸rez             |
+| H. Mendes               |
+| M. Fejzullahu           |
+| A. Pellegrino           |
+| S. Aborah               |
+| M. Ambrose              |
+| M. Ridenton             |
+| J. Strau¡“              |
+| L. S¡_tra               |
+| D. Bock                 |
+| S. Puttkammer           |
+| A. Andersson            |
+| D. Schad                |
+| A. Herrera              |
+| P. Grazziani            |
+| J. Sudiê?               |
+| Kim Jin Hyuk            |
+| Pelayo Morilla          |
+| J. Hofmann              |
+| O. Mfulu                |
+| Fornos                  |
+| C. Melivil¡_            |
+| C. Aasbak               |
+| I. Smith                |
+| T. Lindenhahn           |
+| A. Empereur             |
+| Lim Jae Hyeok           |
+| J. Pirinen              |
+| Jaquit¡¸                |
+| A. Jallow               |
+| N. Moreno               |
+| G. Moss                 |
+| S. Eismann              |
+| F. Br¡_gmann            |
+| M. Kavdanski            |
+| R. Finn                 |
+| Y. Mena                 |
+| T. Redding              |
+| I. Ayala                |
+| B. Bye                  |
+| G. Soto                 |
+| L. Pavez                |
+| M. Haakenstad           |
+| M. Baku                 |
+| W. de la Rosa           |
+| J. Baird                |
+| Pistu                   |
+| L. Grace                |
+| M. Trianni              |
+| Lee Tae Hee             |
+| Rafhael Lucas           |
+| D. Connolly             |
+| S. Camara J¡_nsson      |
+| E. Ruiz                 |
+| C. Landu Landu          |
+| G. Sandberg Magnusson   |
+| Guilherme Oliveira      |
+| I. Akinade              |
+| S. Vega                 |
+| B. Owundi Eko'o         |
+| D. Bohl                 |
+| V. Castellanos          |
+| P. Mako                 |
+| G. Terrani              |
+| W. ??obodzi??ski        |
+| S. Wright               |
+| H. Starostzik           |
+| R. Bentancourt          |
+| H. Abou Demba           |
+| M. Wegner               |
+| M. Bringaker            |
+| C. Diop                 |
+| Ricardo Almeida         |
+| Rafaelson               |
+| G. Pinaud               |
+| S. R¡¸not               |
+| H. Vetlesen             |
+| J. Karlsson             |
+| D. Boo Wiklander        |
+| M. Tramoni              |
+| J. Fabri                |
+| N. Brandenburger        |
+| PC                      |
+| M. Nazarit              |
+| M. Mostr¡_m             |
+| F. Weber                |
+| R. Mukiibi              |
+| A. Soumaoro             |
+| M. Rossmann             |
+| D. Widemann             |
+| D. Iapichino            |
+| Y. Filigrana            |
+| J. Lindner              |
+| M. Cichocki             |
+| A. Kanibolotskyi        |
+| D. Poggenberg           |
+| D. Campos               |
+| J. Hoffman              |
+| R. Peiponen             |
+| L. Casanova             |
+| M. Koj                  |
+| R. Espejord             |
+| K. Toner                |
+| M. Palacios             |
+| Clemente                |
+| A. Romero               |
+| G. Martin               |
+| Hwang ByeongGeun        |
+| T. Blomeyer             |
+| K. Burger               |
+| H. Miyazawa             |
+| T. Arano                |
+| P. Gori                 |
+| D. Djigla               |
+| D. Suga                 |
+| R. Aabid                |
+| E. Benavidez            |
+| A. Marino               |
+| A. Yasser               |
+| L. L¡_mmel              |
+| Park Jong Jin           |
+| J. Pendant              |
+| A. Elogo                |
+| S. Kind Mikalsen        |
+| M. Derrien              |
+| B. S¡?rmo               |
+| T. Bayliss              |
+| Guerrero                |
+| S. Herrera              |
+| A. Diop                 |
+| A. Akkaynak             |
+| R. Anane-Gyasi          |
+| M. Ratajczak            |
+| M. Broberg              |
+| H. Bonmann              |
+| G. Fabiano              |
+| E. Andersson            |
+| A. Gordyushenko         |
+| Vall¡¶s                 |
+| T. Kruse                |
+| Y. Hasegawa             |
+| I. Twum                 |
+| P. Diouf                |
+| T. Br¡_ker              |
+| A. Accardi              |
+| S. Kroll                |
+| F. Krogstad             |
+| O. Sissoko              |
+| S. Braun                |
+| M. Gr¡_sch              |
+| R. Nilsson              |
+| M. Armellino            |
+| A. McEneff              |
+| C. Andrew               |
+| H. Amin                 |
+| M. Berr¡_o              |
+| R. Lemus                |
+| A. Chambers             |
+| M. Marrone              |
+| B. Rotenberg            |
+| L. Andrenacci           |
+| T. Ishikawa             |
+| T. Baumgart             |
+| G. Alucema              |
+| A. Cistana              |
+| Choi Jae Soo            |
+| D. Giraldo              |
+| S. Gbegnon              |
+| G. Rogers               |
+| Maximiano               |
+| T. Schilk               |
+| S. Paw??owski           |
+| E. Baldini              |
+| O. Framelin             |
+| K. Osyra                |
+| F. Cernuto              |
+| P. Wilson               |
+| S. P¡¸rez               |
+| S. Larsen               |
+| F. Barrientos           |
+| J. Putze                |
+| S. Pino                 |
+| E. Mjelde               |
+| P. Pomykal              |
+| B. Babiarz              |
+| M. Sans                 |
+| Fran Cruz               |
+| D. Wiebe                |
+| O. Berg                 |
+| J. Arctander Moe        |
+| T. Hagn                 |
+| Alberto Espeso          |
+| S. Schimmer             |
+| Paulo Vitor             |
+| W. Viitala              |
+| Gonzalo Pereira         |
+| M. Ristl                |
+| I. De Santis            |
+| V. Bindia               |
+| R. Lamie                |
+| D. Soto                 |
+| T. Vincensini           |
+| D. Barreto              |
+| A. Andrianarimanana     |
+| D. Jubitana             |
+| M. Salas                |
+| R. C¡_rdoba             |
+| C. Lindquist            |
+| S. Donnellan            |
+| D. Kozica               |
+| T. Ephestion            |
+| W. Jord¡‡n              |
+| F. Jagie????o           |
+| H. Storb¡_k             |
+| Borja Fern¡‡ndez        |
+| Jang Dae Hee            |
+| M. Barreiro             |
+| Kang Ji Hoon            |
+| Lee Jin Hyun            |
+| F. Lepore               |
+| E. Frederiksen          |
+| G. Ingrosso             |
+| Bae Ki Jong             |
+| A. Layouni              |
+| J. Salazar              |
+| L. Sierra               |
+| S. Bywater              |
+| Chema                   |
+| O. Kudryk               |
+| D. Deniê?               |
+| D. H¡_mmet              |
+| K. Magennis             |
+| J. Mountney             |
+| P. Pfl¡_cke             |
+| N. Falasco              |
+| R. McCabe               |
+| M. McNulty              |
+| E. Parish               |
+| R. Tongyik              |
+| W. Meyiwa               |
+| D. Reimann              |
+| T. Heintz               |
+| K. Dermaku              |
+| K. Seki                 |
+| S. Beusnard             |
+| G. Mutombo              |
+| S. Zizzo                |
+| A. Horwath              |
+| A. Sosa                 |
+| M. Kuleli               |
+| K. Duncan               |
+| L. Nolan                |
+| H. Futami               |
+| D. Granli               |
+| J. Vargas               |
+| Emilio Bernad           |
+| Murilo Mendes           |
+| J. Obrian               |
+| J. M¡_bius              |
+| C. Kobald               |
+| S. Nelson               |
+| D. So??decki            |
+| M. Hongla               |
+| V. Dragomir             |
+| D. Schmidt              |
+| Ayala                   |
+| N. Erlbeck              |
+| D. Gallagher            |
+| M. Hauptmeijer          |
+| A. Granlund             |
+| Kim Dong Min            |
+| F. Kusiê?               |
+| A. Sorge                |
+| F. Venegas              |
+| R. Shinzato             |
+| Borja Estepa            |
+| M. Solheim              |
+| S. Morishita            |
+| A. Pikk                 |
+| A. Ahmed                |
+| J. Soto                 |
+| F. Adu Kwame            |
+| M. Hamoud               |
+| I. Alba                 |
+| A. Akinyemi             |
+| M. Guti¡¸rrez           |
+| G. Diaz                 |
+| R. ten Hove             |
+| C. Fagan                |
+| J. McGing               |
+| J. Jim¡¸nez             |
+| Carlos Gracia           |
+| R. Hern¡‡ndez           |
+| G. Piscitella           |
+| Samuel Manch¡_n         |
+| Andr¡¸s Mart¡_n         |
+| N. Fofana               |
+| A. Golec                |
+| C. P¡¸rez               |
+| F. Valenê?iê?           |
+| G. Woods                |
+| M. Konradsen            |
+| S. Gronsveld            |
+| T. Matsuura             |
+| D. Pelivan              |
+| M. Agger                |
+| T. Campanini            |
+| K. Larson               |
+| J. Hern¡‡ndez           |
+| G. Perrulli             |
+| Kim Keun Hoan           |
+| Pep¡Ô                   |
+| B. Haunstrup            |
+| Lee Dong Su             |
+| Q. Bena                 |
+| B. Kyere                |
+| C. Harold               |
+| I. Gelios               |
+| D. Kud??a               |
+| Lee Sang Ki             |
+| W. Omsberg              |
+| B. Schwarz              |
+| R. Koczor               |
+| P. Hellquist            |
+| M. Baude                |
+| S. Hyodo                |
+| S. ¡™kland              |
+| L. Sapela               |
+| A. Rizzo                |
+| D. Montoya              |
+| Lee Min Gi              |
+| C. Maloney              |
+| A. Taylor-Sinclair      |
+| B. Castrillon           |
+| M. Hiller               |
+| Jo Jae Cheol            |
+| M. Juel Andersen        |
+| D. van der Heijden      |
+| O. Zawada               |
+| M. Mudryk               |
+| V. Belon                |
+| Callej¡_n               |
+| M. Owusu                |
+| L. Hurtado              |
+| F. Ibarg¡_en            |
+| A. Boniotti             |
+| Y. Kobayashi            |
+| A. Porcino              |
+| Pedro L¡_pez            |
+| P. Mingoia              |
+| D. Santa                |
+| H. Ishige               |
+| Yeo Seong Hae           |
+| M. Fritz                |
+| E. Valla D¡?nnem        |
+| L. Abdulahi             |
+| N. Townsend             |
+| A. Gryszkiewicz         |
+| Jon Bakero              |
+| D. Mazzocco             |
+| J. Koutroumbis          |
+| J. Pretel               |
+| Guerrero                |
+| K. Nowak                |
+| B. ?‘erbeê?iê?          |
+| G. Fuentes              |
+| J. Coppens              |
+| L. Maniero              |
+| S. Antonijevic          |
+| J. Zwarts               |
+| L. Rodr¡_guez           |
+| R. Fergonzi             |
+| A. Pelvas               |
+| T. Rocha                |
+| H. Su¡‡rez              |
+| M. Carraro              |
+| K. McHattie             |
+| Javi Mier               |
+| D. Facchin              |
+| J. Manns                |
+| J. Eiswohld             |
+| K. Sarkodie             |
+| B. Garmston             |
+| M. Cubillos             |
+| Abenza                  |
+| Yun Sang Ho             |
+| I. Diallo               |
+| C. Halkett              |
+| C. Cisternas            |
+| D. Sugimoto             |
+| L. Lapoussin            |
+| Nam Seung Woo           |
+| C. Sibbald              |
+| A. Mosquera             |
+| T. Yokoyama             |
+| J. Clisby               |
+| Kike                    |
+| C. Akas                 |
+| M. K¡_hne               |
+| M. Ofkir                |
+| A. Amaya                |
+| D. Wright               |
+| W. P¡¸rez               |
+| B. Utvik                |
+| A. Tabanelli            |
+| A. Berzel               |
+| C. Stefa??czyk          |
+| M. G¡_mez               |
+| Y. van Osch             |
+| Yago                    |
+| S. van der Lei          |
+| M. Austin               |
+| W. Balikwisha           |
+| M. PiêŸtkowski          |
+| H. L¡_fkvist            |
+| I. Anthony              |
+| J. Del¡¸traz            |
+| F. Ortega               |
+| Josep Mart¡_nez         |
+| O. Rodas                |
+| I. Wadji                |
+| M. Gardawski            |
+| M. Bauer                |
+| Javi Alonso             |
+| R. Delaney              |
+| K. Yamamoto             |
+| J. Esquivel             |
+| R. Pillot               |
+| S. Kavanagh             |
+| A. Falch                |
+| K. Ono                  |
+| D. Duarte               |
+| J. Torres               |
+| B. Bye                  |
+| D. Olsson               |
+| S. Nkansah              |
+| V. M¡¸ndez              |
+| Luis Perea              |
+| E. Kane                 |
+| Carlitos                |
+| S. Pittman              |
+| E. Bajrami              |
+| J. Karlstr¡_m           |
+| L. Watkowiak            |
+| O. Sangante             |
+| G. Buckley              |
+| T. Schmidt              |
+| Sui Weijie              |
+| S. Mvibudulu            |
+| M. Degerlund            |
+| J. Delem                |
+| W. Jobello              |
+| T. David                |
+| A. Danek                |
+| G. Bolger               |
+| D. Caicedo              |
+| M. Maphangule           |
+| Jes¡_s Jim¡¸nez         |
+| G. Traor¡¸              |
+| Lee Hyun Woong          |
+| T. Drage                |
+| Rayco                   |
+| Han Hee Hoon            |
+| R. Kitto                |
+| N. Taravel              |
+| Y. Verschaeren          |
+| M. Osores               |
+| I. Bermingham           |
+| N. Shipnoski            |
+| J. Murray               |
+| J. Mauersberger         |
+| S. Ambri                |
+| H. Gjesdal              |
+| M. Pode                 |
+| A. Startsev             |
+| Kim Sang Won            |
+| N. D¡_az                |
+| A. Dadakdeniz           |
+| V. Mykolenko            |
+| W. Paw??owski           |
+| Samuel                  |
+| T. Thomas               |
+| E. Sanhueza             |
+| Y. Guzm¡‡n              |
+| M. Albornoz             |
+| E. êÒiviê?              |
+| J. Gerezgiher           |
+| J. Hoffmann             |
+| G. Alcal¡‡              |
+| A. D?_wiga??a           |
+| S. Fri¡µj¡_nsson        |
+| J. Mosquera             |
+| Joan Sastre             |
+| F. Russo                |
+| A. Rossipal             |
+| A. Abang                |
+| Seol Tae Soo            |
+| M. Nalepa               |
+| M. Kon¡¸                |
+| Bae Jae Woo             |
+| O. Shaw                 |
+| M. van Kins             |
+| N. Thaller              |
+| Viti                    |
+| M. Kouhyar              |
+| J. Sanchez              |
+| C. Krempicki            |
+| Marc Vales              |
+| M. Rodriguez            |
+| K. Fukai                |
+| H. Sy                   |
+| L. Fomba                |
+| C. Hu¡¸rfano            |
+| V. Slivka               |
+| L. Kelly                |
+| W. Hashimoto            |
+| A. Kant¡¸               |
+| S. Strand               |
+| Vitinho                 |
+| B. Maguire              |
+| M. H¡®kansson           |
+| F. Kohls                |
+| Jeon Hyeon Chul         |
+| M. Rose                 |
+| D. Mihailovic           |
+| D. Rosende              |
+| Y. Tanaka               |
+| F. Dady Ngoy            |
+| D. Oldaker              |
+| R. Basque               |
+| Javi P¡¸rez             |
+| Z. Elbouzedi            |
+| Prendes                 |
+| S. Coulibaly            |
+| E. Seidou               |
+| S. Ohlsson              |
+| V. Leikvoll Moberg      |
+| D. Johnson              |
+| L. ¡_hman               |
+| S. Cleveland            |
+| J. Thompson             |
+| Jo¡œo Lopes             |
+| Lee Jin Hyung           |
+| C. Essers               |
+| Jung San                |
+| M. Pribula              |
+| E. Nouri                |
+| J. Murphy               |
+| Mart¡_ Vil¡‡            |
+| K. Piedrahita           |
+| Seo Young Jae           |
+| I. Morales              |
+| A. Mangan               |
+| K. Baccus               |
+| S. Takahashi            |
+| S. S¡?rli               |
+| Choi Hyun Tae           |
+| G. Crociata             |
+| D. Williams             |
+| K. Lejeune              |
+| S. Barreto              |
+| T. Sawada               |
+| M. Yamane               |
+| J. Dem                  |
+| I. Varone               |
+| T. S¡_derstr¡_m         |
+| Fran Serrano            |
+| Lucas Rodrigues         |
+| J. Araya                |
+| J. Wehrmann             |
+| R. Taillan              |
+| C. Sabaly               |
+| J. Konings              |
+| A. Ndiaye               |
+| A. Groi¡“               |
+| C. Gameiro              |
+| F. Ahumada              |
+| A. Vaikla               |
+| A. Roldan               |
+| D. Amankwaa             |
+| S. Baliê?               |
+| S. Griffin              |
+| M. Sad¡_lek             |
+| G. Jansson              |
+| J. Teze                 |
+| A. Tanaka               |
+| H. Kyprianou            |
+| Y. Kimoto               |
+| Baba Fernandes          |
+| L. Walthert             |
+| E. ¡?vila               |
+| Aar¡_n                  |
+| B. Clarke               |
+| L. Grorud               |
+| C. Ponce                |
+| A. McDonald             |
+| K. Nakamura             |
+| W. Pi¡ñones             |
+| A. Nouri                |
+| A. Tideman              |
+| H. Robstad              |
+| K. Shimura              |
+| M. Festa                |
+| M. McGlinchey           |
+| M. Siabanis             |
+| R. Murray               |
+| Y. Ma-Kalambay          |
+| Kim Geon Ung            |
+| E. Bwomono              |
+| R. Herrmann             |
+| D. Gonzalez             |
+| J. Verdugo              |
+| J. Marulanda            |
+| M. Vallecilla           |
+| P. Choroba              |
+| D. Guidi                |
+| W. Decas                |
+| L. Hemmerich            |
+| L. Reddy                |
+| N. Sakurauchi           |
+| H. Ndam                 |
+| Ricardo Friedrich       |
+| Jeong Tae Wook          |
+| M. Lode                 |
+| F. Arkenberg            |
+| D. P¡¸rez               |
+| Rub¡¸n Enri             |
+| M. Simon                |
+| E. Dahlin               |
+| D. ?‘ariê?              |
+| D. C¡_rdoba             |
+| E. Figueroa             |
+| D. Sterling             |
+| K. Michalak             |
+| O. Balanta              |
+| T. Doornbusch           |
+| A. Lassiter             |
+| J. Champness            |
+| E. Jonassen S¡_tervik   |
+| C. Kane                 |
+| M. Brouwer              |
+| P. Maronilli            |
+| L. Bender               |
+| R. Kaib                 |
+| F. Motori               |
+| T. Socha                |
+| V. Tankovskyi           |
+| I. Dresevic             |
+| P. Maiorino             |
+| S. Dooley               |
+| M. Reuvers              |
+| F. Pereyra              |
+| P. Heigre               |
+| K. Garcia               |
+| S. Cordero              |
+| J. Ram¡_rez             |
+| A. Nabi                 |
+| B. Meredith             |
+| F. Medina               |
+| D. Anyembe              |
+| Meseguer                |
+| O. Rommens              |
+| J. Robinson             |
+| B. Collins              |
+| I. Pedrelli             |
+| M. Cort¡¸s              |
+| N. Beyer                |
+| F. Gattoni              |
+| J. Ayala                |
+| Oh Se Hun               |
+| S. Cond¡¸               |
+| Kim Min Tae             |
+| A. Andersson            |
+| C. Wehan                |
+| P. Kpozo                |
+| K. Fila                 |
+| C. Thompson             |
+| E. Vignato              |
+| F. Ot¡‡rola             |
+| N. Kikuchi              |
+| N. Lemus                |
+| J. Aros                 |
+| A. Sissako              |
+| Jorge Mier              |
+| A. Ciss                 |
+| G. Postma               |
+| L. Marseiler            |
+| C. Kouan                |
+| J. ??ukowski            |
+| P. Knechtel             |
+| R. Lopes                |
+| W. Hesl                 |
+| S. Mohlin               |
+| G. Smith                |
+| K. Moreno               |
+| Jose                    |
+| Eliseo Falc¡_n          |
+| S. Str¡?mnes            |
+| K. Pestka               |
+| M. Kolar                |
+| F. Br¡_gmann            |
+| B. Urba??ski            |
+| M. Sch¡_ler             |
+| V. Sk¡_ld               |
+| J. Coustrain            |
+| W. Mosquera             |
+| M. Chouiar              |
+| B. H¡¸ry                |
+| A. Nilsson              |
+| B. Figueroa             |
+| M. Sagnan               |
+| N. Barona               |
+| J. Sierra               |
+| A. Ryczkowski           |
+| L. Jonsson              |
+| C. Reppesg¡®rd          |
+| M. Uusitalo             |
+| T. Alarc¡_n             |
+| J. Chianese             |
+| T. Vaiho                |
+| L. Sotomayor            |
+| N. Baxter               |
+| K. Gipson               |
+| I. Hajtiê?              |
+| K. Zapolnik             |
+| S. Klaas                |
+| C. O'Malley             |
+| R. Porteous             |
+| F. Geisler              |
+| A. Zendejas             |
+| T. Chor¡_               |
+| J. V¡‡zquez             |
+| L. Lauberbach           |
+| D. Orlishausen          |
+| D. Whitaker             |
+| L. Mariê?               |
+| M. Piccinocchi          |
+| Kim Gyeong Min          |
+| R. Gonz¡‡lez            |
+| Song Soo Yeong          |
+| Jeong Dong Yun          |
+| G. Hatano               |
+| N. Fern¡‡ndez           |
+| C. Dilo                 |
+| D. Thomas               |
+| E. Edwards Jr.          |
+| M. Engelhardt           |
+| Y. Bisseck              |
+| J. Williams             |
+| B. Risa                 |
+| D. Contreras            |
+| O. ¡¤marsson            |
+| M. Toye                 |
+| Cordero                 |
+| N. Jackson              |
+| B. K¡_llman             |
+| L. Cueto                |
+| P. Camara               |
+| W. Cuesta               |
+| Campos                  |
+| F. Plach                |
+| D. Foulon               |
+| L. Fritzson             |
+| P. Da Silva             |
+| K. Skaanes              |
+| I. Ugbo                 |
+| C. Operi                |
+| C. K¡_ppel              |
+| T. Robinet              |
+| Yeremi Valer¡_n         |
+| S. Finley               |
+| D. Tchamba              |
+| A. Kartalis             |
+| F. Saavedra             |
+| J. Lorch                |
+| Gorka Giralt            |
+| T. Buitink              |
+| B. Ziegenbein           |
+| A. Stadler              |
+| R. Muhammed             |
+| M. Payares              |
+| F. Sucsuz               |
+| C. C¡‡sseres Jr         |
+| Giovanni                |
+| M. Barnofsky            |
+| T. Galdames             |
+| S. Ando                 |
+| A. Dabasse              |
+| S. Mladenovic           |
+| M. Funk                 |
+| S. Amuzie               |
+| C. Villanueva           |
+| D. Tuma                 |
+| J. Thorsen              |
+| Ryu Jae Moon            |
+| I. Franjic              |
+| M. Mara                 |
+| A. Brorsson             |
+| O. Petrak               |
+| A. D¡?nnum              |
+| S. Tanser               |
+| K. Danielak             |
+| Y. Diouf                |
+| Brian Torres            |
+| L. Jackson              |
+| Aitor Lorea             |
+| M. Ambrosiewicz         |
+| P. Michael              |
+| A. Yildirim             |
+| D. Byrtek               |
+| S. Erimuya              |
+| F. Obilor               |
+| K. Partida              |
+| R. Laidlaw              |
+| S. van Hooijdonk        |
+| B. Gaye                 |
+| T. Bj¡_rkstr¡_m         |
+| Y. Fofana               |
+| J. M¡_der               |
+| M. Pawelec              |
+| T. Bonga                |
+| Kiki                    |
+| M. Warcholak            |
+| Romero                  |
+| S. Puri                 |
+| L. Ameka Autchanga      |
+| Y. Guti¡¸rrez           |
+| L. Daschner             |
+| T. Goppel               |
+| M. Rodas                |
+| R. Idda                 |
+| M. Petrasso             |
+| J. Hildebrandt          |
+| A. St¡®hl               |
+| H. Johansen             |
+| V. Golemiê?             |
+| F. ¡?lvarez             |
+| J. Melling              |
+| G. Leigh                |
+| Lee Jae Ik              |
+| J. Keohane              |
+| S. Boyd                 |
+| D. Haspolat             |
+| D. Lanius               |
+| Ha Sung Min             |
+| N. Tiknizyan            |
+| N. Heidemann            |
+| S. Mbakata              |
+| P. Hercher              |
+| L. Kramer               |
+| M. Gillespie            |
+| T. Smith                |
+| Kim Young Sin           |
+| R. Wulle                |
+| A. Fontana              |
+| J. Vogliotti            |
+| D. Moreno               |
+| E. Maanane              |
+| M. Meneses              |
+| T. B¡?rkeeiet           |
+| A. Bennett              |
+| J. Lindsey              |
+| Miquel Parera           |
+| M. Reule                |
+| V. M¡_ller              |
+| S. Ruiz                 |
+| P. Petroviê?            |
+| R. Callachan            |
+| Leandro                 |
+| Park Dae Han            |
+| D. Burgzorg             |
+| Marcus Vin¡_cius        |
+| V. Wernersson           |
+| M. Havekotte            |
+| S. Bastoni              |
+| J. Caletti              |
+| L. Mokhevishvili        |
+| V. Myhra                |
+| M. Ferreira             |
+| M. Mo¡?nza              |
+| K. Appiah-Kubi          |
+| P. Keegan               |
+| J. Vagnoman             |
+| J. Brandon              |
+| E. Omondi               |
+| R. Alvarez              |
+| Christovao              |
+| I. Magnusson            |
+| K. Anzai                |
+| D. Emmanouilidis        |
+| P. Smyth                |
+| K. Kristinsson          |
+| Lee Bum Soo             |
+| S. Mac¡_as              |
+| P. Pfeiffer             |
+| B. Anderson             |
+| L. Grimshaw             |
+| V. Vermeer              |
+| M. Kaasa                |
+| C. Sierra               |
+| E. Mensah               |
+| S. Baradji              |
+| M. Igonen               |
+| S. Galloway             |
+| D. Moreno               |
+| T. Mokwa                |
+| Y. Tatsuta              |
+| M. Hjulmand             |
+| Y. Shimaya              |
+| Hiago                   |
+| K. Scheidhauer          |
+| An Jin Beom             |
+| M. Kakuda               |
+| Kang Ji Yong            |
+| C. Owens                |
+| J. Bocanegra            |
+| Lee Min Soo             |
+| C. Castro               |
+| S. Ohlsson              |
+| F. Cambeses             |
+| L. Compagnucci          |
+| M. Cortesi              |
+| M. Borquez              |
+| M. Robinson             |
+| J. Jesgarzewski         |
+| J. Allen                |
+| E. Bekiroglu            |
+| J. Albert               |
+| S. Ayala                |
+| Bae Sin Yeong           |
+| E. Bytyqi               |
+| Diego Ferraresso        |
+| T. Christensen          |
+| J. R¡?nningen           |
+| P. Stê¯pi??ski          |
+| W. McDonald             |
+| M. Stamnestr¡?          |
+| P. Klimala              |
+| K. Browne               |
+| M. Saito                |
+| D. Imrie                |
+| D. Orellana             |
+| A. Borkovic             |
+| G. Vicario              |
+| A. Karadas              |
+| A. Madrid               |
+| G. Cardozo              |
+| F. Sittsam              |
+| F. El Khoumisti         |
+| T. Warschewski          |
+| F. Sgarbi               |
+| Jung Seon Ho            |
+| I. Meslier              |
+| H. Daza                 |
+| J. Mondrag¡_n           |
+| E. Wichne               |
+| B. C¡_rdoba             |
+| A. Eisa                 |
+| F. Brown Forbes         |
+| Jo Soo Chul             |
+| T. Onozawa              |
+| L. Tupta                |
+| J. Pepper               |
+| K. Sekiguchi            |
+| Lee Jeong Bin           |
+| J. Masson               |
+| Kim Hyun Hun            |
+| Y. Takahashi            |
+| B. Wilson               |
+| D. Heymans              |
+| C. Randall              |
+| H. Nakamura             |
+| A. Gallo                |
+| R. Watson               |
+| D. Olave                |
+| R. Romero               |
+| B. Jano?‡eviê?          |
+| B. Hanlan               |
+| C. Martin               |
+| Kuk Tae Jeong           |
+| D. Oberhauser           |
+| E. Kupen                |
+| D. Jarl                 |
+| D. Carr                 |
+| L. Scherff              |
+| C. Brandeborn           |
+| M. Drennan              |
+| M. Allende              |
+| M. Olsen Pettersen      |
+| A. Berry                |
+| H. Wingo                |
+| C. Omeje                |
+| J. Aguilera             |
+| S. Warmolts             |
+| D. Mantilla             |
+| M. Pa??aszewski         |
+| M. Paviê?               |
+| K. Hachisuka            |
+| G. Damen                |
+| C. Rubio Sivodedov      |
+| Manu Navarro            |
+| J. Wallens              |
+| A. Parisi               |
+| L. Yamaguchi            |
+| K. Tagawa               |
+| J. Herrera              |
+| P. Chato                |
+| Seo Jae Min             |
+| Salcedo                 |
+| L. Donnelly             |
+| A. Balanta              |
+| C. Georges              |
+| W. Hajda                |
+| N. Petric               |
+| R. Telfer               |
+| Ota¡ño                  |
+| J. Monta¡ño             |
+| J. Marcinkowski         |
+| G. Herrem               |
+| S. Periê?               |
+| S. Raheriharimanana     |
+| I. Wilson               |
+| P. Berg                 |
+| D. Quaranta             |
+| T. Velaphi              |
+| M. Vargas               |
+| O. Ural                 |
+| M. Youssouf             |
+| J. D¡_az                |
+| H. Hankiê?              |
+| K. Rauhut               |
+| B. Wilson               |
+| T. Kunimoto             |
+| V. Xenopoulos           |
+| B. Warland              |
+| M. Paes                 |
+| C. Palacios             |
+| L. O'Brien              |
+| D. Ochieng              |
+| W. Kurtovic             |
+| Yoo Seung Min           |
+| T. Freriks              |
+| Manu Moya               |
+| A. S¡_dlund             |
+| M. Kurogi               |
+| K. Sessa                |
+| K. Michalski            |
+| Carlos Vicente          |
+| T. Fleckstein           |
+| D. Restrepo             |
+| J. Zickert              |
+| Y. Ota                  |
+| K. Velasco              |
+| Lee Eun Beom            |
+| D. Cruz                 |
+| J. Vel¡‡squez           |
+| K. Skoglund             |
+| L. Gottwalt             |
+| S. Walukiewicz          |
+| Park Jeong Su           |
+| P. Bastianello          |
+| B. Osayi-Samuel         |
+| D. O'Shaughnessy        |
+| L. Selahi               |
+| A. Makarov              |
+| D. Henriquez            |
+| E. Ntim                 |
+| I. N¡_sberg             |
+| M. Sifneos              |
+| Ximo Miralles           |
+| I. Furu                 |
+| M. Godinho              |
+| F. H¡_rberg             |
+| A. Calver               |
+| Lombo                   |
+| D. Rasak                |
+| E. Segberg              |
+| K. B¡_hnlein            |
+| A. Angulo               |
+| A. Nguiamba             |
+| T. van de Berg          |
+| M. Belkheir             |
+| M. Okazaki              |
+| Heo Jae Won             |
+| M. Rauschenberg         |
+| S. Murillo              |
+| P. Ruiz                 |
+| Guo Quanbo              |
+| Algobia                 |
+| A. Favaro               |
+| T. Moniwa               |
+| R. Yamasaki             |
+| K. Krasniqi             |
+| E. Weeger               |
+| B. Mirelis              |
+| N. Watanabe             |
+| R. Ljubicic             |
+| A. Santos               |
+| J. Molina               |
+| K. Arthur               |
+| W. Parra                |
+| O. Alseth               |
+| J. Ort¡_z               |
+| Matis Carvalho          |
+| David Gil               |
+| E. List                 |
+| M. Salazar              |
+| P. K¡_hn                |
+| U. Saracco              |
+| T. K¡_nigsmann          |
+| J. Pearson              |
+| Adri¡‡n                 |
+| R. Garay                |
+| V. van den Bogert       |
+| A. De Francesco         |
+| I. Camara               |
+| N. Cowburn              |
+| M. Eberwein             |
+| I. Aaneba               |
+| C. Kountouriotis        |
+| M. Janssen              |
+| J. Karlstr¡?m           |
+| Lin Liangming           |
+| A. Putna                |
+| Caio Marcelo            |
+| P. Posipal              |
+| R. Fulton               |
+| M. Herrera              |
+| A. Sicker               |
+| V. Drku?‡iê?            |
+| D. Ch¡‡vez              |
+| J. Maddox               |
+| R. Strain               |
+| R. Germain              |
+| M. Komenda              |
+| M. Seidel               |
+| M. Kristensen           |
+| R. Izumi                |
+| J. Valencia             |
+| Leja                    |
+| Y. Suzuki               |
+| I. Baba                 |
+| J. Illanes              |
+| M. Batmaz               |
+| V. Demaku               |
+| C. S¡‡nchez             |
+| A. Krysiak              |
+| B. Moore                |
+| M. Peano                |
+| A. Fejzullahu           |
+| D. Johnson              |
+| S. Ntiya-Ntiya          |
+| L. Czyborra             |
+| D. Bulman               |
+| M. Viviani              |
+| W. Kuzain               |
+| M. Erboê“a              |
+| G. Bizzotto             |
+| Sergio Garc¡_a          |
+| V. Cabezas              |
+| E. Katayama             |
+| S. Arnold               |
+| C. Cooke                |
+| F. Ugrinic              |
+| M. Hausjell             |
+| N. Plume                |
+| H. Nakabayashi          |
+| T. Buhagiar             |
+| J. Ebot-Etchi           |
+| C. Ojeda                |
+| Kim Gyeong Min          |
+| J. David                |
+| T. Almada               |
+| K. Riksvold             |
+| A. Poggenborg           |
+| R. Lauwers              |
+| Sebas Moyano            |
+| S. McLoughlin           |
+| T. Matsuda              |
+| D. Fitz                 |
+| A. Barry                |
+| B. Nordstr¡_m           |
+| F. Pangop               |
+| F. Sachpekidis          |
+| M. M¡?lvadgaard         |
+| M. Gr¡?dem              |
+| M. Merghem              |
+| B. Galv¡‡n              |
+| P. Perina               |
+| C. Jacob                |
+| J. Pereyra              |
+| J. Hou S¡_ter           |
+| M. Dimun                |
+| D. Corcoran             |
+| S. Laiton               |
+| C. Riascos              |
+| D. Choini¡¶re           |
+| M. Crowe                |
+| D. Fern¡‡ndez           |
+| C. McCarthy             |
+| Lee Tae Ho              |
+| Yeun Jong Gyu           |
+| F. Piszczek             |
+| M. Krau¡“               |
+| S. Nigro                |
+| A. Greene               |
+| M. Zeidan               |
+| B. Bvuma                |
+| T. Pukhov               |
+| H. Gueye                |
+| V. Theocharis           |
+| D. Evtimov              |
+| P. McLain               |
+| L. B¡_tge               |
+| F. Rohner               |
+| M. Garc¡_a              |
+| L. Valenti              |
+| Feng Jing               |
+| M. Kessel               |
+| V. Henry                |
+| C. Chastang             |
+| M. G¡_rski              |
+| C. Lewis                |
+| S. Kono                 |
+| G. Holohan              |
+| J. Quezada              |
+| J. Romil                |
+| R. Lawan                |
+| A. Canbaz               |
+| O. Zanzala              |
+| D. Gojko                |
+| Park Chang Jun          |
+| M. Hingerl              |
+| N. Fr¡_ling             |
+| K. Mi?_                 |
+| S. Asta                 |
+| A. Verda                |
+| R. Browne               |
+| C. Odoi-Atsem           |
+| D. Aymerich             |
+| A. Hollingen            |
+| J. Morsay               |
+| C. Siya                 |
+| Yun Ji Hyeok            |
+| J. D¡_rfler             |
+| A. Tiritiello           |
+| A. Nathaniel-George     |
+| D. Chessa               |
+| A. Diallo               |
+| H. Fukushima            |
+| L. Kosakiewicz          |
+| J. Mendive              |
+| Lee Jong Won            |
+| D. Hume                 |
+| E. Dahl Reitan          |
+| A. Bianchimano          |
+| J. Vreman               |
+| M. Di Gennaro           |
+| Pablo Ram¡_n            |
+| T. Iida                 |
+| F. Faist                |
+| W. Tchimbemb¡¸          |
+| P. Pusic                |
+| I. Rojas                |
+| L. Chiappero            |
+| B. Sissoko              |
+| E. Amenyido             |
+| R. Charles-Cook         |
+| M. Heinrich             |
+| A. Erlingmark           |
+| G. Jones                |
+| M. Cassara              |
+| K. Khosonov             |
+| L. Budzi??ek            |
+| J. Barmby               |
+| A. Bamba                |
+| C. Ilic                 |
+| M. Gurski               |
+| B. Gyamfi               |
+| Daniel Rebollo          |
+| Adri¡‘ Arjona           |
+| K. Brennan              |
+| E. Berger               |
+| M. Choini¡¶re           |
+| A. Siebeck              |
+| G. Thompson             |
+| D. Tagami               |
+| D. Vokic                |
+| R. D'Haese              |
+| S. Seth                 |
+| I. Ogbu                 |
+| L. Malag¡_n             |
+| M. Drawz                |
+| K. Tanno                |
+| A. Kovaê?eviê?          |
+| F. Graudenz             |
+| R. Sallinger            |
+| L. Fraser               |
+| J. van Benthem          |
+| D. S¡‡nchez             |
+| ¡?lvaro Garc¡_a         |
+| A. Bodart               |
+| M. Bleve                |
+| M. Behrens              |
+| V. Sirotov              |
+| C. Horgan               |
+| E. Reijnders            |
+| C. McDermott            |
+| U. Mohammed             |
+| E. Andersson            |
+| M. Bean                 |
+| A. Purzycki             |
+| M. Maranda              |
+| T. Kallev¡®g            |
+| Gori L¡_pez             |
+| F. Musaev               |
+| M. Burgess              |
+| E. Kutler               |
+| Chechu Grana            |
+| T. Siekman              |
+| E. Bullaude             |
+| D. Camacho              |
+| S. Cosgrove             |
+| R. Tranberg             |
+| S. Bougrine             |
+| S. Byrne                |
+| F. Ju¡‡rez              |
+| F. Lapis                |
+| S. Folan                |
+| F. Andersson            |
+| U. Tezel                |
+| R. Jendrusch            |
+| J. Borgmann             |
+| D. Esmel                |
+| R. Husiê?               |
+| V. Arboleda             |
+| G. Mells                |
+| Z. Grich                |
+| Yoon Dong Min           |
+| M. Jadama               |
+| A. May                  |
+| C. Maghoma              |
+| O. Dytyatev             |
+| D. Margush              |
+| M. Bokoum               |
+| R. Wolszty??ski         |
+| R. Escobar              |
+| F. Kr¡_ger              |
+| H. Heath                |
+| T. Domgjoni             |
+| M. Bola                 |
+| H. Mitsumaru            |
+| J. Qwiberg              |
+| S. Fujitani             |
+| A. êÒatiê?              |
+| A. Akinola              |
+| K. Monlouis             |
+| B. Njie                 |
+| D. Salazar              |
+| V. Drchal               |
+| J. Caraballo            |
+| A. Chrzanowski          |
+| T. Clarke               |
+| F. Carstens             |
+| G. Scalera              |
+| B. Levis                |
+| B. Miele                |
+| J. Sievers              |
+| J. Abarzua              |
+| M. Falkeborn            |
+| R. Boultam              |
+| G. Giannoutsos          |
+| L. Plogmann             |
+| S. Perilli              |
+| S. Adrian               |
+| A. Rufer                |
+| E. Mena                 |
+| M. Haarup               |
+| K. Callan-McFadden      |
+| R. Grego-Cox            |
+| L. Fenton               |
+| J. Rasheed              |
+| A. Siemaszko            |
+| B. Breukers             |
+| G. Kêñlêñ¡_             |
+| H. Kon¡¸                |
+| Iv¡‡n Martos            |
+| D. O'Halloran           |
+| L. Wedl                 |
+| D. Markey               |
+| J. Schuurman            |
+| J. Stanic               |
+| Joo Hyun Ho             |
+| ¡¤scar Gil              |
+| S. Matthews             |
+| K. Fukuda               |
+| L. Kryeziu              |
+| B. Sabovic              |
+| D. Padilla              |
+| S. Sosa                 |
+| Nuno Malheiro           |
+| K. Devaney              |
+| J. Kristoffersen        |
+| N. Sugai                |
+| K. Ikeda                |
+| Y. Roemer               |
+| Jeong Seung Won         |
+| T. Corbaz               |
+| N. Baumann              |
+| M. Kamenz               |
+| A. Ramalingom           |
+| K. Madianga             |
+| P. Gehrmann             |
+| T. Weiner               |
+| F. Manzo                |
+| A. Sissoko              |
+| D. Olsson               |
+| P. McClean              |
+| D. Horka?‡              |
+| T. Enomoto              |
+| S. Sidler               |
+| C. K¡_hlwetter          |
+| Moon Jeong In           |
+| D. Pender               |
+| A. Gamboa               |
+| E. Henschel             |
+| J. Abbel                |
+| Han Seung Wook          |
+| K. Eek                  |
+| C. Manley               |
+| D. Martinoviê?          |
+| W. Ditta                |
+| J. Andersson            |
+| R. Sykes                |
+| P. Kucharczyk           |
+| P. Bucha                |
+| J. WrêŸbel              |
+| K. Colvey               |
+| S. Kelly                |
+| M. Bachini              |
+| Iv¡‡n Jaime             |
+| R. Armand               |
+| C. Dunn                 |
+| Oh Inpyo                |
+| M. Tyler                |
+| R. Ariza                |
+| B. Murphy               |
+| P. Arredondo            |
+| F. Hollinger-Janzen     |
+| M. Baghdadi             |
+| K. Ka¡¨boue             |
+| V. Burgoa               |
+| Pol Moreno              |
+| M. Blakstad             |
+| S. Tigges               |
+| O. Bertel               |
+| H. Konat¡¸              |
+| L. Zigi                 |
+| L. Forte                |
+| D. Cawley               |
+| F. Bj¡?rkan             |
+| J. C¡_rdova             |
+| V. Wojtkowiak           |
+| G. Ver¡_n               |
+| R. Meraz                |
+| T. Miyazaki             |
+| C. Wood                 |
+| F. Pintos               |
+| Maikel Santana          |
+| J. Gies                 |
+| I. Arai                 |
+| A. Kecsk¡¸s             |
+| Cha Yeong Hwan          |
+| M. Sawa                 |
+| Sergio G¡_nzalez        |
+| W. Burger               |
+| A. Hadzic               |
+| Alberto Gonz¡‡lez       |
+| W. Patching             |
+| M. Kremer               |
+| J. Vergara Berrio       |
+| E. Louro                |
+| K. Alexandersson        |
+| N. Konstandopoulos      |
+| S. Seferings            |
+| I. El Kabbou            |
+| T. van den Belt         |
+| D. Rosin                |
+| M. Busi                 |
+| D. Blazevic             |
+| S. Shearer              |
+| M. Steeves              |
+| A. Ceylan               |
+| Samu P¡¸rez             |
+| D. Shiels               |
+| N. Maeda                |
+| E. Salles               |
+| A. Didic                |
+| L. Kryger               |
+| B. Provoste             |
+| F. Brorsson             |
+| T. Hadler               |
+| R. Goteni               |
+| A. Ikedi                |
+| A. Najem                |
+| S. Duggan               |
+| M. ?‘arkiê?             |
+| K. Pytlik               |
+| N. Alioui               |
+| Kim Yeong Bin           |
+| M. Hamrol               |
+| J. Cataldi              |
+| C. Veerachat            |
+| D. Clarke               |
+| M. Segbers              |
+| F. Arhin                |
+| E. Opoku                |
+| J. Kirkpatrick          |
+| E. Steen                |
+| K. ¡™demarksbakken      |
+| F. Serraiocco           |
+| N. Sandberg             |
+| I. Aliseda              |
+| K. Irep                 |
+| M. Flynn                |
+| B. Mugabi               |
+| P. Menzel               |
+| D. Fontani              |
+| G. Della Bernardina     |
+| A. McGowan              |
+| Y. Mabella              |
+| N. Nasseri              |
+| C. Elva                 |
+| V. Stenzel              |
+| S. Sy                   |
+| M. McKee                |
+| S. Bengriba             |
+| T. Yanagi               |
+| J. Bekkema              |
+| G. Quezada              |
+| F. Agu                  |
+| R. Polley               |
+| I. Chair                |
+| I. Khemis               |
+| M. ¡?lvarez             |
+| O. Brynhildsen          |
+| M. Rosas                |
+| J. Torres               |
+| B. Dennehy              |
+| M. Qui¡ñones            |
+| R. Keskin               |
+| A. Lacey                |
+| J. Shipley              |
+| P. G¡_mez               |
+| M. Kudus                |
+| J. Maxted               |
+| L. Ndenbe               |
+| Dai Wai-Tsun            |
+| M. Andersson            |
+| T. Wiesner              |
+| B. Wright               |
+| S. Vidal                |
+| M. Kelly                |
+| H. Andersson            |
+| A. DeJohn               |
+| T. Klup?_               |
+| T. M¡?lgaard            |
+| H. Benka¡¨d             |
+| J. Falkmar              |
+| N. Bazan                |
+| Y. Takaoka              |
+| D. Nasu                 |
+| D. Conner               |
+| S. Kodama               |
+| Yoo Ji Ha               |
+| M. L¡_pez               |
+| K. Huntelaar            |
+| J. Atanasov             |
+| K. Leidsman             |
+| M. Spasic               |
+| D. Jarvis               |
+| D. Bajselmani           |
+| A. Barreal              |
+| F. Pasqualoni           |
+| Ahn Seong Nam           |
+| Kang Bong Gyun          |
+| T. Rotter               |
+| M. Kadlec               |
+| S. Serderov             |
+| A. Jê¯drych             |
+| J. Muscatt              |
+| T. De Bie               |
+| E. Elizalde             |
+| A. Urzi                 |
+| J. Dunleavy             |
+| K. Chvedukas            |
+| E. Korkmaz              |
+| S. Russell              |
+| O. Sail                 |
+| N. Bizet                |
+| Madger Gomes            |
+| Iker Gouj¡_n            |
+| C. Storm                |
+| J. Bruhns               |
+| E. Yb¡‡¡ñez             |
+| E. Karic                |
+| J. Bolado               |
+| A. Riemann              |
+| A. Gogiê?               |
+| L. B¡¸land-Goyette      |
+| E. P¡‡lsson             |
+| Lee Tae Hee             |
+| M. Hoxha                |
+| C. Kpekawa              |
+| C. Ti¡¸hi               |
+| J. Flatt                |
+| C. Arroyave             |
+| J. Heil                 |
+| A. Jakubiak             |
+| K. Reaves               |
+| V. Baume                |
+| R. Morishita            |
+| A. Awad                 |
+| G. Azzinnari            |
+| A. Mendy                |
+| G. Blackwood            |
+| J. Hanato               |
+| B. Mines                |
+| Kwon Tae Ahn            |
+| S. Akg¡_n               |
+| B. Thomas-Asante        |
+| Y. Begraoui             |
+| Guille Lara             |
+| W. Wood                 |
+| N. C¡_rdova             |
+| Kim Bo Seop             |
+| E. Celebi               |
+| E. Dabo                 |
+| Mello                   |
+| P. Kasim                |
+| E. N¡_sbak Brenden      |
+| J. O'Doherty            |
+| M. Acton                |
+| F. Lobos                |
+| K. Tokushige            |
+| J. Serafin              |
+| M. Carreazo             |
+| R. Aoki                 |
+| F. Camara               |
+| I. Boye                 |
+| Y. Goke                 |
+| H. Sandvik              |
+| Park Jung Soo           |
+| M. Vano                 |
+| M. Rieder               |
+| L. Hupfauf              |
+| M. Kuchta               |
+| A. Banasiak             |
+| Pedro Goulart           |
+| J. Lahne                |
+| M. Cavalleri            |
+| A. Beyazêñt             |
+| D. Klomp                |
+| J. Keatings             |
+| P. Di Nardo             |
+| A. Baroan               |
+| R. Menayese             |
+| J. Thompson             |
+| Liu Ruofan              |
+| D. Jajic                |
+| I. Mensah               |
+| H. Castegren            |
+| I. Oda                  |
+| L. Cacace               |
+| E. Veiga                |
+| R. Cornwall             |
+| S. van Dijck            |
+| D. Gremsl               |
+| M. S¡_tra               |
+| H. Magnetti             |
+| S. Abraham              |
+| G. Buon                 |
+| D. Morrissey            |
+| G. Akkan                |
+| L. Espinoza             |
+| J. Requena              |
+| C. Mbulu                |
+| G. Cuomo                |
+| A. G¡_rleyen            |
+| L. Jones                |
+| T. Reithmeir            |
+| Zheng Tao               |
+| R. Prieto               |
+| K. Balogiannis          |
+| F. Due                  |
+| L. Saxton               |
+| P. Cherrie              |
+| E. Stokes               |
+| A. Xhemajli             |
+| G. Banaziak             |
+| D. Sv¡‡ê?ek             |
+| D. Sauerland            |
+| G. Kelly                |
+| Y. Fujita               |
+| S. Duke-McKenna         |
+| D. Mosquera             |
+| M. Real                 |
+| F. Schwarzholz          |
+| D. Nizic                |
+| E. Granat               |
+| V. Cordoba              |
+| L. Schelenz             |
+| A. Morley               |
+| M. Nikoliê?             |
+| J. Pesta¡ña             |
+| E. Dick                 |
+| B. Williams             |
+| C. Antwi                |
+| J. Albrecht             |
+| J. Sands                |
+| J. Mu¡ñoz               |
+| J. Hoekstra             |
+| K. Niemczycki           |
+| Park Ji Min             |
+| S. Ucar                 |
+| N. Quindt               |
+| L. Mulaj                |
+| Z. Herivaux             |
+| M. Staniszewski         |
+| T. Cuello               |
+| K. Ayong                |
+| L. Italiano             |
+| M. Urynowicz            |
+| E. Navarrete            |
+| G. Tryggvason           |
+| C. Higuera              |
+| M. Onuoha               |
+| A. Bacci                |
+| J. Hodek                |
+| Y. Letard               |
+| R. Isomura              |
+| I. Lara                 |
+| J. Jaime                |
+| L. Hern¡‡ndez           |
+| R. Hirosue              |
+| T. Baack                |
+| K. Bucker               |
+| M. Miljevic             |
+| M. Brink                |
+| S. Kjellevold           |
+| J. Tratt                |
+| J. Kelly                |
+| L. Grill                |
+| D. Lyon                 |
+| F. Pizzicanella         |
+| J. Pantemis             |
+| R. Wilmots              |
+| E. Boyle                |
+| M. Sprang               |
+| R. Acquah               |
+| M. Wada                 |
+| A. Canessa              |
+| M. Roerslev             |
+| M. Holzer               |
+| Mario S¡‡nchez          |
+| C. Guti¡¸rrez           |
+| D. Webster              |
+| Kim Hyo Gi              |
+| J. Inamoto              |
+| J. McDonnell            |
+| W. Ali                  |
+| A. Jakobsen             |
+| L. Bonilla              |
+| M. Woud                 |
+| J. L¡_we                |
+| B. Rivas                |
+| S. Cartwright           |
+| Y. Oyanedel             |
+| Lim Eun Soo             |
+| R. van Doorn            |
+| Jos¡¸ Uche              |
+| K. Goba                 |
+| E. Bansen               |
+| J. Lunney               |
+| M. Cooper               |
+| J. Orellana             |
+| G. Abreg¡_              |
+| J. Doona                |
+| R. Blumberg             |
+| C. Coleman              |
+| A. Gafaiti              |
+| G. Lapslie              |
+| M. Gonzalez             |
+| L. Ingolotti            |
+| A. Aliev                |
+| M. Bauer                |
+| B. Sielewski            |
+| A. Talal                |
+| G. Kilama               |
+| J. Debayo               |
+| B. Chapman              |
+| V. Gendrey              |
+| M. Schlegel             |
+| Y. Bangsow              |
+| M. Leahy                |
+| S. Solli                |
+| M. Firlej               |
+| H. Bos                  |
+| J. Bird                 |
+| V. Arveladze            |
+| K. Kirihata             |
+| A. Penny                |
+| G. Boylan               |
+| I. Chicco               |
+| A. Nalic                |
+| S. Karweina             |
+| Fabio                   |
+| M. Harness              |
+| C. Rzonca               |
+| A. Manzur               |
+| S. Bone                 |
+| T. Sopacua              |
+| H. Takimoto             |
+| M. Soldo                |
+| K. Petratos             |
+| L. Schaffran            |
+| R. Cooney               |
+| N. Samayoa              |
+| A. Soukouna             |
+| K. Ogawa                |
+| K. Fegrouche            |
+| F. Lauenborg            |
+| K. Saka                 |
+| K. Buckley              |
+| L. Scott                |
+| S. McMann               |
+| A. Rosteghin            |
+| A. Wheeler-Omiunu       |
+| N. Awuku                |
+| D. Riccardi             |
+| D. Petersson            |
+| E. Pauchet              |
+| S. Farelli              |
+| E. Gr¡_ndemann          |
+| M. Ludwig               |
+| E. Pletinckx            |
+| A. Elyounoussi          |
+| M. Simakan              |
+| G. Kyrnats              |
+| S. Hiramatsu            |
+| N. Ralph                |
+| J. Italiano             |
+| N. Baeza                |
+| C. Ross                 |
+| Yuan Mincheng           |
+| C. Baldovino            |
+| M. Rudakov              |
+| J. Sbarra               |
+| J. Romero               |
+| R. Borka??a             |
+| P. Magnon               |
+| Marcos Lav¡_n           |
+| C. Quenum               |
+| Y. Akiyama              |
+| S. Parlati              |
+| L. Klemenz              |
+| P. Tomczyk              |
+| A. Oteh                 |
+| K. Hattanda             |
+| M. Bayo                 |
+| N. D'Agostino           |
+| M. Jeahze               |
+| L. Maniero              |
+| T. Attis                |
+| A. Tecpan¡¸catl         |
+| M. Talbi                |
+| E. Herrera              |
+| M. Reinthaler           |
+| R. Benz                 |
+| L. Desmond              |
+| N. Strunck              |
+| H. Arellano             |
+| M. Sevimler             |
+| Kim Jung Ho             |
+| H. Marcelin             |
+| M. J¡?rgensen           |
+| M. Beeney               |
+| R. Alm                  |
+| M. Bassouamina          |
+| Maikel                  |
+| J. Urz¡_a               |
+| Park Ji Soo             |
+| D. Liszka               |
+| M. Kumbulla             |
+| S. Wamangituka          |
+| R. Way                  |
+| Y. Takeoka              |
+| P. Marie                |
+| M. Trovato              |
+| Y. Urra                 |
+| A. Beestin              |
+| S. Kowalczyk            |
+| Mart¡_n                 |
+| Javi Rubio              |
+| K. Lebon                |
+| J. Krahl                |
+| Q. Roberts              |
+| S. Milewski             |
+| B. Verbong              |
+| Ryang Yong Gi           |
+| S. Micolta              |
+| C. Huanca               |
+| D. Grootenhuis          |
+| T. Righetti             |
+| Zhang Chong             |
+| G. Shaw                 |
+| P. Camar¡‡              |
+| Y. Maeda                |
+| C. Galvin               |
+| B. Stevenson            |
+| M. Yamada               |
+| J. Schau                |
+| D. Kelly                |
+| S. Gu¡µjohnsen          |
+| W. Ebane                |
+| L. Kouagba              |
+| Pablo Cacharr¡_n        |
+| J. Rodr¡_guez           |
+| J. Doherty              |
+| T. Maya                 |
+| J. Christensen          |
+| M. Pattier              |
+| J. Cobi¡‡n              |
+| D. Sugioka              |
+| C. M¡®nsson             |
+| R. Coughlan             |
+| A. ¡?lvarez             |
+| A. Estupi¡ñ¡‡n          |
+| H. Rodgers              |
+| S. Shome                |
+| T. Matsumoto            |
+| M. êµnan                |
+| A. Little               |
+| J. Brinch               |
+| A. Bj¡_rnstr¡_m         |
+| M. Donohue              |
+| Park Kwang Il           |
+| Javi L¡_pez             |
+| M. Heê?a                |
+| A. Sebald               |
+| S. Santoro              |
+| A. Ba                   |
+| R. Lowry                |
+| R. Tugarev              |
+| F. Ourega               |
+| M. Salaba               |
+| F. Maddaloni            |
+| R. Emanuelsson          |
+| T. Robinson             |
+| H. Evjen                |
+| E. Aiwu                 |
+| M. Lund                 |
+| P. Soko??owski          |
+| A. Kaltoft              |
+| E. Linthorst            |
+| B. Lekstr¡_m            |
+| L. Schneider            |
+| D. Ogawa                |
+| F. Quiroz               |
+| L. Ketterer             |
+| A. Nilsson              |
+| C. Coll                 |
+| S. S¡?rl¡?kk            |
+| N. Awassi               |
+| R. Hirakawa             |
+| C. Cooke                |
+| P. van der Vlag         |
+| T. Nijhuis              |
+| L. Bogdan               |
+| L. Wildin               |
+| M. Lillebo              |
+| R. Kim                  |
+| M. Irigoyemborde        |
+| T. Ominami              |
+| I. Angulo               |
+| G. Carvajal             |
+| C. Akono                |
+| S. Pab¡_n               |
+| C. Donovan              |
+| Park Jung Ho            |
+| M. Soumar¡¸             |
+| S. Pirkl                |
+| J. Senior               |
+| S. Jim¡¸nez             |
+| T. Nagura               |
+| S. Seedorf              |
+| N. Insfr¡‡n             |
+| L. Ntumba               |
+| M. Tokida               |
+| V. Vanbaleghem          |
+| G. Volpe                |
+| C. Manicone             |
+| M. Herrera              |
+| J. Caballero            |
+| Kim Min Jun             |
+| M. Al Mutairi           |
+| E. Botheim              |
+| J. Qui¡ñones            |
+| A. Kabashi              |
+| J. Ch¡‡vez              |
+| C. Weale                |
+| H. Abdelli              |
+| F. Godoy                |
+| D. Tejeda               |
+| D. Diani                |
+| B. Vera                 |
+| A. Errico               |
+| T. Moschi¡_n            |
+| F. Sollacaro            |
+| O. Mbaizo               |
+| O. Pati¡ño              |
+| J. Arboleda             |
+| Wang Yaopeng            |
+| O. Shannon              |
+| L. Kunga                |
+| E. Bird                 |
+| M. Zach                 |
+| E. Masciangelo          |
+| E. Mergen               |
+| Y. Soma                 |
+| N. Fiedler              |
+| J. Bursztyn             |
+| J. Sullivan             |
+| J. Scott                |
+| B. Kavanagh             |
+| J. Vall                 |
+| N. Araya                |
+| K. Twardek              |
+| O. Ottesen              |
+| P. O'Conor              |
+| Y. Zabaleta             |
+| K. Stanek               |
+| S. Dahlstr¡_m           |
+| M. Isaza                |
+| J. De Smet              |
+| K. Sheppard             |
+| R. Senhadji             |
+| F. Navarro              |
+| K. Lynch                |
+| M. Ranmark              |
+| J. Rondeel              |
+| A. Al Qahtani           |
+| J. Montgomery           |
+| M. Lenes                |
+| J. Jim¡¸nez             |
+| I. Dom¡_nguez           |
+| J. Debrah               |
+| L. Coordes              |
+| B. Avramovic            |
+| I. J¡_nsson             |
+| R. Musaba               |
+| J. Requena              |
+| C. Kenna                |
+| N. Amamoo               |
+| Choi Young Eun          |
+| C. Vel¡‡squez           |
+| L. White                |
+| N. Leemhuis             |
+| P. Boevink              |
+| R. Rosenqvist           |
+| J. Tabinas              |
+| J. Hope                 |
+| R. Takahashi            |
+| P. Harant               |
+| M. Trejo                |
+| J. Ch¡‡vez              |
+| L. Br¡_ggemeier         |
+| A. Hartigan             |
+| V. Glaentzlin           |
+| J. Kitolano             |
+| M. Lacroix              |
+| A. Campion              |
+| J. Mahon                |
+| O. Yaman                |
+| A. Simpson              |
+| U. Yazê“êñlêñ           |
+| O. Krusnell             |
+| Y. Otto                 |
+| L. B¡_rger              |
+| A. Bass                 |
+| A. Wolniewicz           |
+| S. Osorio               |
+| B. Cam                  |
+| R. Donelon              |
+| C. Fogacci              |
+| C. Fermina              |
+| T. Vancooten            |
+| R. El Hankouri          |
+| R. Suzuki               |
+| O. ¡_zdemir             |
+| R. Cretaro              |
+| M. Halstead             |
+| R. Schofield            |
+| S. H¡_rtel              |
+| T. Trueba               |
+| Chen Anqi               |
+| D. Turnbull             |
+| A. Edqvist              |
+| E. Ngwatala             |
+| A. Samuel               |
+| M. M??y??ski            |
+| Morro                   |
+| D. O'Connor             |
+| M. Johnstone            |
+| N. Cadden               |
+| N. Bishop               |
+| L. Mart¡_nez            |
+| A. Suljic               |
+| I. Tapia                |
+| J. Eastwood             |
+| J. Brimmer              |
+| S. Gr¡?nning            |
+| D. Williams             |
+| B. Chibani              |
+| J. Meneses              |
+| T. Ogiwara              |
+| K. Ellison              |
+| E. Bohinen              |
+| A. Fletcher             |
+| Zeng Shuai              |
+| R. Laryea               |
+| M. Sipê_ak              |
+| M. Miller               |
+| O. Johansson            |
+| Z. Westbrooke           |
+| M. K¡_bbing             |
+| E. Chapman              |
+| L. Orellano             |
+| L. Rogerson             |
+| L. Thomas               |
+| P. Sander               |
+| J. Jensen               |
+| A. Alibekov             |
+| N. Giraldo              |
+| J. Mashart              |
+| D. Casey                |
+| C. Norman               |
+| N. Lema¡ªtre            |
+| F. Ross                 |
+| O. Kakay                |
+| D. Leahy                |
+| R. Allassani            |
+| F. Zorba                |
+| T. Blackmon             |
+| T. Arndal               |
+| Lee Gyu Seong           |
+| R. de Vos               |
+| M. Wasielewski          |
+| N. Simon                |
+| K. Ademi                |
+| C. Gallego              |
+| D. Adshead              |
+| J. Adelson              |
+| C. Brown                |
+| S. Bouzar               |
+| J. Curran               |
+| M. Lansing              |
+| D. Cayupil              |
+| O. Valakari             |
+| S. Todd                 |
+| A. Ordagiê?             |
+| C. Evans                |
+| J. Krasniqi             |
+| C. Libertiaux           |
+| L. Migliorelli          |
+| M. Millar               |
+| K. Kitamoto             |
+| M. Mejlstrup Pedersen   |
+| A. Bayêñndêñr           |
+| N. Helmbrecht           |
+| O. Tejeda               |
+| D. Mottley-Henry        |
+| J. Hernandez            |
+| B. Folami               |
+| I. Jasarevic            |
+| Lee Rae Joon            |
+| T. Mizutani             |
+| B. Dione                |
+| A. Ram¡_rez             |
+| K. Kovaê?eviê?          |
+| E. Sivertsen            |
+| G. Berggren             |
+| D. Parker               |
+| C. Mafoumbi             |
+| A. Bolger               |
+| A. Al Basisi            |
+| B. Fox                  |
+| E. Kastrati             |
+| M. Al Rashidi           |
+| Kim Woo Suk             |
+| M. Radecki              |
+| O. Jackson              |
+| T. Sibbick              |
+| K. Oldenburger          |
+| M. Lema                 |
+| N. Cordero              |
+| J. Rodr¡_guez           |
+| B. Hussein              |
+| H. Pern¡_a              |
+| V. Ekani                |
+| L. Gordon               |
+| V. Karaku?“             |
+| R. Lloyd                |
+| J. Ponceau              |
+| R. Noda                 |
+| K. Stamatopoulos        |
+| Y. Lenze                |
+| F. Chenkam              |
+| M. Klass                |
+| J. Vom Steeg            |
+| E. Palacios             |
+| Kim Joon Beom           |
+| H. Pritchard            |
+| K. Engbers              |
+| K. Wootton              |
+| L. Malicsek             |
+| K. da Graca             |
+| B. Maguire              |
+| I. Shinozuka            |
+| S. Palma                |
+| C. Crane                |
+| A. Rizzo                |
+| D. Lyness               |
+| J. Holldack             |
+| A. Goelzer              |
+| A. Mironov              |
+| G. Gbell¡¸              |
+| M. Gillam               |
+| J. Zea                  |
+| I. Turner               |
+| Vasco Paci¡Ôncia        |
+| F. Akammadu             |
+| S. Shotton              |
+| J. Truque               |
+| H. Douglas              |
+| A. Adetula              |
+| B. Alf¡¸rez             |
+| D. Mitov                |
+| M. Gal¡¸                |
+| R. Harvey               |
+| J. McMillan             |
+| H. Clifton              |
+| T. Heward-Belle         |
+| S. Long                 |
+| P. S¡‡nchez             |
+| R. Koot                 |
+| J. Pourtau              |
+| D. Mushitu              |
+| D. Mena                 |
+| Jo Yong Jae             |
+| M. Wolff                |
+| B. Lucum¡_              |
+| O. Kensdale             |
+| K. Szyma??ski           |
+| M. Or??owski            |
+| J. Ferry                |
+| S. Janssen              |
+| M. Catenacci            |
+| B. Kennedy              |
+| M. Guel                 |
+| T. R¡_nning             |
+| A. Jerez                |
+| M. Pedersen             |
+| K. Politz               |
+| A. Grinwis              |
+| K. Shiihashi            |
+| M. Layer                |
+| M. Grundmann            |
+| W. Biedrzycki           |
+| D. Szczepan             |
+| D. Baur                 |
+| C. Ariza                |
+| S. Amin                 |
+| D. Hutchinson           |
+| H. Isted                |
+| R. Caicedo              |
+| V. Viot                 |
+| S. McWilliams           |
+| T. Roberts              |
+| J. McDonagh             |
+| D. Malhue               |
+| A. Koldere              |
+| D. Stynes               |
+| M. Kos                  |
+| Jeong Chee In           |
+| J. Lennon               |
+| H. Duman                |
+| N. Anh¡_lcher           |
+| J. Stenmark             |
+| S. Belkahia             |
+| C. Tovar                |
+| C. Goslin               |
+| B. Stephens             |
+| Y. Requena              |
+| K. Cantwell             |
+| S. Lavelle              |
+| M. Rodrigues            |
+| Javito                  |
+| W. Jakkit               |
+| H. St Clair             |
+| S. Gr¡?nli              |
+| P. Jensen               |
+| M. Lis                  |
+| S. Kawamata             |
+| A. Nsakala              |
+| B. Hern¡‡ndez           |
+| D. Takahashi            |
+| L. Brand                |
+| Y. Zummack              |
+| R. Feely                |
+| J. Hove                 |
+| T. Deters               |
+| H. Bellman              |
+| C. MacPherson           |
+| C. Rojas                |
+| R. Okazaki              |
+| J. Rees                 |
+| K. Ogi                  |
+| ¡?lvaro G¡_mez          |
+| T. Makowski             |
+| C. Sickinger            |
+| K. Dybowski             |
+| Dar¡_o Ramos            |
+| M. Ogkmpoe              |
+| N. Pejoviê?             |
+| C. Waters               |
+| J. Williams             |
+| K. Mendoza              |
+| F. Becker               |
+| J. Brown                |
+| R. Deprem               |
+| I. Samba                |
+| J. Castillo             |
+| H. Campbell             |
+| F. Myhre                |
+| I. Sauter               |
+| M. Casta¡ño             |
+| L. Ureta                |
+| J. Ceesay               |
+| J. Fischer              |
+| D. Paw??owski           |
+| M. Shinada              |
+| C. Lyon                 |
+| G. Pender               |
+| E. Crona                |
+| M. Idzik                |
+| S. Kulenoviê?           |
+| J. Talbot               |
+| J. Hallam               |
+| J. Olufsen              |
+| J. Thompson             |
+| J. Valdebl¡‡nquez       |
+| C. N¡_¡ñez              |
+| S. Mallon               |
+| D. Tomii                |
+| K. Suzuki               |
+| M. Sopoê?ko             |
+| D. Pierias              |
+| R. Tsonev               |
+| C. Ellis                |
+| H. Finndell             |
+| E. Maulana Vikri        |
+| D. Ingham               |
+| I. Cameron              |
+| P. Bird                 |
+| Y. Avcêñlar             |
+| R. Majecki              |
+| S. Nakagawa             |
+| R. Oates                |
+| P. Patron               |
+| S. Sohm                 |
+| Y. Mersin               |
+| S. Want                 |
+| S. Bojang               |
+| L. Conlan               |
+| J. Medina               |
+| D. Kaneko               |
+| D. van Kaam             |
+| F. Fischerauer          |
+| A. Hellborg             |
+| D. Miya                 |
+| M. Nottingham           |
+| A. Abdulhameed          |
+| Y. Wakizaka             |
+| R. Correa               |
+| O. Solbakken            |
+| A. Koljic               |
+| J. Nieva                |
+| E. Sandberg             |
+| T. Tanaka               |
+| Zuo Yiteng              |
+| W. Fitzgerald           |
+| K. Osako                |
+| A. Hudu                 |
+| I. Pearce               |
+| R. Motegi               |
+| K. Cabral               |
+| A. Majok                |
+| R. Ito                  |
+| I. ¡nal                |
+| E. Chilufya             |
+| Lee Joon Hee            |
+| M. Stajduhar            |
+| A. Eichhorn             |
+| D. Pipe                 |
+| S. Brolin               |
+| A. Pearce               |
+| B. White                |
+| B. Nygren               |
+| L. Davies               |
+| F. Espinoza             |
+| Z. Mills                |
+| H. Herrera              |
+| A. Ajdareviê?           |
+| Y. Uekusa               |
+| K. Rowles               |
+| K. Ito                  |
+| C. O'Toole              |
+| E. Moran                |
+| I. Kon¡¸                |
+| K. Awuah                |
+| L. Ashby-Hammond        |
+| D. Daly                 |
+| S. Pedersen             |
+| O. ¡nl¡_¡_if¡_i        |
+| A. Hoven                |
+| C. Zuvela               |
+| O. Christensen          |
+| D. Breitfelder          |
+| G. Vetti                |
+| M. Mi¡ño                |
+| W. Le Pogam             |
+| N. Mbo                  |
+| Lee Kwang Jin           |
+| S. Abifade              |
+| C. Lokoli-Ngoy          |
+| E. Bijlsma              |
+| D. Hayes                |
+| M. ?_liwa               |
+| S. Moore                |
+| Y. Takeda               |
+| J. Kavanagh             |
+| Kim Tae Ho              |
+| R. Vinderslev           |
+| A. Nurudeen             |
+| T. Damsgaard            |
+| K. Henry                |
+| R. Batlokwa             |
+| B. Leneis               |
+| Lee Hyun Sik            |
+| J. Etou                 |
+| Cui Ming'an             |
+| P. Pierzcha??a          |
+| A. Thurgate             |
+| Y. Magnin               |
+| C. Clifford             |
+| T. Hagelskjaer          |
+| N. Rodes                |
+| L. Mirwa                |
+| Ko Jae Hyun             |
+| M. Steinwender          |
+| M. Vantruba             |
+| H. Wilder               |
+| B. Delihasan            |
+| D. Puster               |
+| L. Gibbens              |
+| L. Perea                |
+| A. Ogalde               |
+| M. Bersano              |
+| I. Olaofe               |
+| D. Barnett              |
+| R. Ferguson             |
+| N. Vitr¡¸               |
+| M. Shabow               |
+| A. Linn¡¸r              |
+| J. Roberts              |
+| K. Horgan               |
+| J. Tibbetts             |
+| R. Balanta              |
+| D. Arias                |
+| W. Huffer               |
+| W. Hanssen              |
+| C. Lindley              |
+| M. Borgogno             |
+| G. Haag                 |
+| C. McVey                |
+| I. Iba¡ñez              |
+| H. Sobol                |
+| Cristian Arco           |
+| G. Satalino             |
+| A. Diaz                 |
+| M. Hauptmann            |
+| S. Kelly                |
+| K. Zobeck               |
+| D. Bielica              |
+| R. Sandford             |
+| E. Wearen               |
+| Gianluca Zanette        |
+| T. Bloor                |
+| V. Arzayus              |
+| M. Kaastrup             |
+| J. Sinclair             |
+| P. Gueye                |
+| M. Godoy                |
+| J. ??o?_                |
+| S. Gussi¡®s             |
+| G. Piras                |
+| Taliby                  |
+| P. Waring               |
+| A. Agouda               |
+| K. Ahmadi               |
+| B. Maher                |
+| N. Sheron               |
+| S. Baptiste             |
+| M. El Idrissy           |
+| C. Goddard              |
+| B. Leiva                |
+| M. Valenta              |
+| T. Forbes               |
+| K. Lara                 |
+| A. Baun                 |
+| B. Niezgoda             |
+| A. Doê“an               |
+| J. L¡_pez               |
+| M. Matic                |
+| A. Arigoni              |
+| T. Amos                 |
+| Y. Taki                 |
+| D. B??anik              |
+| Y. Nishimura            |
+| S. Mann                 |
+| M. Karlsson             |
+| Y. Oki                  |
+| R. Swan                 |
+| D. Noone                |
+| M. Ross Jensen          |
+| F. Kraft                |
+| A. Bonnah               |
+| M. Barker               |
+| C. Bassett              |
+| V¡_ctor G¡_mez          |
+| B. Berr¡_os             |
+| N. Logue                |
+| D. Dennehy              |
+| S. Harding              |
+| K. Sibille              |
+| J. Guttau               |
+| E. ¡?etindere           |
+| Jang Eun Gyu            |
+| F. Durmu?“              |
+| R. Lopez-Espin          |
+| Y. Aguila               |
+| J. Romo                 |
+| A. Troffa               |
+| A. Quintana             |
+| K. Klaesson             |
+| H. Ishikawa             |
+| C. Moreno               |
+| E. Selen                |
+| M. Hern¡‡ndez           |
+| A. Sevestre             |
+| L. Dunne                |
+| S. Jurado               |
+| G. Kawanami             |
+| D. Araki                |
+| R. Uehara               |
+| N. Gartside             |
+| R. Piscitelli           |
+| H. Guenouche            |
+| N. Hahn                 |
+| E. K¡_c                 |
+| J. Galiê?               |
+| B. Doherty              |
+| K. Yamaguchi            |
+| H. Ishihara             |
+| W. Scott                |
+| H. Offia                |
+| R. Ya¡ñez               |
+| K. Ward                 |
+| G. Rogers               |
+| K. McIntosh             |
+| W. Graham               |
+| M. Henvey               |
+| L. Gray                 |
+| K. Mellado              |
+| F. T¡_gtstr¡_m          |
+| J. Kronig               |
+| M. Edjouma              |
+| L. Wackerle             |
+| T. Shibuya              |
+| B. Mumba                |
+| R. G¡_mez               |
+| A. Gilchrist            |
+| V. Reitstetter          |
+| B. Ozegovic             |
+| M. Orozco               |
+| P. Almqvist             |
+| M. Prinz                |
+| M. Garc¡_a              |
+| P. Pellegrino           |
+| R. Al Otaibi            |
+| N. H¡_m¡_l¡_inen        |
+| A. Kapp                 |
+| L. Shabani              |
+| A. Kawai                |
+| A. Rodriguez            |
+| S. Daly-B¡_tz           |
+| A. Gudj¡_nsson          |
+| H. Andersson            |
+| C. Elliot               |
+| V. Triboulet            |
+| A. Zaizen               |
+| C. L¡_pez               |
+| A. Kigbu                |
+| S. Tracy                |
+| C. Sep¡_lveda           |
+| S. Martin               |
+| Y. Nishibe              |
+| Liu Le                  |
+| R. Clampin              |
+| L. Hlabi                |
+| L. O'Reilly             |
+| H. Noda                 |
+| M. Leiva                |
+| A. Hod?_iê?             |
+| R. Mantel               |
+| J. Hamon                |
+| J. Earing               |
+| M. Kamissoko            |
+| O. Nowak                |
+| B. Wade                 |
+| H. Hawsawi              |
+| J. Montoya              |
+| Dong YanFeng            |
+| M. Said                 |
+| G. Arib                 |
+| T. Mohr                 |
+| J. ??abojko             |
+| D. Camara Bos           |
+| J. Saki                 |
+| A. Benedyczak           |
+| Li Chen                 |
+| A. Kajpust              |
+| J. Cano                 |
+| M. Minder               |
+| A. Marie-Sainte         |
+| L. Sutton               |
+| D. Amos                 |
+| M. Goto                 |
+| A. Splaine              |
+| C. Peters               |
+| R. Sulewski             |
+| Luo Hao                 |
+| R. Deiman               |
+| T. Okuda                |
+| T. J¡_ntti              |
+| R. Ayagwa               |
+| C. Ortiz                |
+| P. Samiec-Talar         |
+| Y. Nuxoll               |
+| A. Sow                  |
+| S. Svenl¡¸n             |
+| F. Botiseriu            |
+| H. Palacios             |
+| N. Bai                  |
+| H. Pickering            |
+| J. Dakir                |
+| J. Jaimes               |
+| J. Tromsdal             |
+| O. Aga                  |
+| J. Brannefalk           |
+| J. Simpson              |
+| E. Durmaz               |
+| A. Groundstroem         |
+| Y. Fofana               |
+| A. Harper               |
+| H. Darling              |
+| E. Ross                 |
+| D. Wenzel-Halls         |
+| J. Qui¡ñones Saya       |
+| K. Brouder              |
+| J. Berger               |
+| T. Holland              |
+| R. Lovett               |
+| C. Magerusan            |
+| V. Adebayor             |
+| T. Queen                |
+| C. Ruiz                 |
+| M. Malec                |
+| F. Acosta               |
+| M. Ndione               |
+| E. Fadda                |
+| M. Siby                 |
+| E. Otim                 |
+| D. Bochicchio           |
+| O. Sverrisson           |
+| A. Smith                |
+| S. Avanzini             |
+| E. Pastrana             |
+| B. Lund                 |
+| M. Ibacache             |
+| M. Howard               |
+| J. McAtee               |
+| R. Akbari               |
+| A. Reyes Ambuila        |
+| I. Sadiq                |
+| L. Morrison             |
+| R. Strechie             |
+| D. Castro               |
+| O. Sims                 |
+| S. Wilson               |
+| L. Colville             |
+| S. Barone               |
+| C. Scott                |
+| M. ?_atin               |
+| Y. Kurihara             |
+| J. Hackett              |
+| C. Giuliani             |
+| S. Brady                |
+| E. Breivik              |
+| J. Su¡‡rez              |
+| D. GêŸska               |
+| D. Maekawa              |
+| G. Maley                |
+| K. Yoshimaru            |
+| B. Ekincier             |
+| N. van den Dam          |
+| S. Heaney               |
+| M. Venturi              |
+| T. Durso                |
+| L. Gam¡_z               |
+| M. Molenda              |
+| L. D'Arrigo             |
+| V. Barbero              |
+| J. Pereira              |
+| D. Dalling              |
+| E. McKeown              |
+| J. Adams                |
+| N. Celic                |
+| J. Ferreira             |
+| T. Lauritsen            |
+| Kang Yun Koo            |
+| C. Salom¡_n             |
+| I. N¡_¡ñez              |
+| R. Guti¡¸rrez           |
+| W. Popp                 |
+| T. Kircher              |
+| E. McGinty              |
+| S. Gucciardo            |
+| L. Russe                |
+| R. McCourt              |
+| H. Str¡_mgren           |
+| A. Fantini              |
+| M. Giraldo              |
+| A. Damlu                |
+| K. Hori                 |
+| S. Machino              |
+| O. Skarsem              |
+| C. Zamorano             |
+| G. Harada               |
+| E. Vertainen            |
+| J. Beaulieu             |
+| M. Lopez                |
+| F. Fridriksson          |
+| C. Camwell              |
+| J. Macdonald            |
+| M. Schmeling            |
+| P. Plewka               |
+| D. Marzino              |
+| J. Echave               |
+| M. Welch-Hayes          |
+| A. Lyons                |
+| N. Feil                 |
+| G. Gibson               |
+| M. Saunders-Henry       |
+| J. Hanson               |
+| R. Tanaka               |
+| G. Botos                |
+| S. Blaney               |
+| T. Clavijo              |
+| A. Comrie               |
+| Y. Ogaki                |
+| B. Cotter               |
+| R. Masterson            |
+| F. G¡_mez               |
+| J. L¡‡rtiga             |
+| J. Meiser               |
+| M. Olsen                |
+| J. Isaksen              |
+| Yu Zhen                 |
+| Shen Shuaishuai         |
+| L. Butroid              |
+| N. Baumann              |
+| P. Kalambayi            |
+| S. Awaka                |
+| R. K¡_llman             |
+| T. Wood                 |
+| I. Angking              |
+| D. Pik                  |
+| R. Campbell             |
+| N. James                |
+| A. Aktas                |
+| E. Toal                 |
+| R. Hutchinson           |
+| E. Kalsaas              |
+| S. Yoneda               |
+| S. Boyd                 |
+| K. Grozos               |
+| H. Brkic                |
+| M. Pfeifer              |
+| S. Ono                  |
+| B. Crellin              |
+| J. Gallagher            |
+| J. King                 |
+| C. Barrios              |
+| H. Brockbank            |
+| B. Scott                |
+| Zhang Yan               |
+| N. Mantl                |
+| K. Kumor                |
+| S. McNamee              |
+| L. Zottele              |
+| C. Tanor                |
+| K. Katz                 |
+| P. Teixeira             |
+| J. Lankester            |
+| S. ??api??ski           |
+| T. Ryan                 |
+| J. Lindgren             |
+| S. George               |
+| J. McGarry              |
+| M. Loaiza               |
+| D. ??uczak              |
+| A. Tymi??ski            |
+| Liu Boyang              |
+| J. Storevik             |
+| K. Velde                |
+| T. Isherwood            |
+| V. Fazliu               |
+| D. Pakulski             |
+| M. Saavedra             |
+| S. Wolf                 |
+| T. Renaud               |
+| J. Finnerty             |
+| K. Ackermann            |
+| J. Romanski             |
+| D. Guti¡¸rrez           |
+| P. Wi?_niewski          |
+| J. Hamilton             |
+| F. Ibsen                |
+| B. Rivera               |
+| D. Ojo                  |
+| J. Doherty              |
+| N. Geisler              |
+| C. Devlin               |
+| M. Kulke                |
+| L. Pellegrini           |
+| J. Scholz               |
+| S. Moloney              |
+| Y. Omoto                |
+| K. O'Sullivan           |
+| D. Higgins              |
+| K. Krzepisz             |
+| O. Edlund               |
+| L. Hedlund              |
+| J. Wicks                |
+| S. Haubrock             |
+| A. Estacio              |
+| J. Br¡_ndle             |
+| J. Walton               |
+| N. Sette                |
+| K. Sparta               |
+| T. Crawford             |
+| L. Pierre               |
+| F. Figueroa             |
+| R. Harrington           |
+| F. Sasmay               |
+| L. Rivas                |
+| R. Gorman               |
+| D. Smith                |
+| A. Long                 |
+| M. Tomizawa             |
+| Xu Jiamin               |
+| E. L¡_der               |
+| O. Breist¡?l            |
+| M. Schlosser            |
+| L. Talbro               |
+| E. Banza                |
+| Zhu Chenjie             |
+| T. Hamer                |
+| K. Agudelo              |
+| D. Szczerbal            |
+| F. Niang                |
+| N. Tzanev               |
+| Y. Suzuki               |
+| J. Keaney               |
+| F. Majchrowicz          |
+| A. Estrada              |
+| D. Feka                 |
+| J. Dodd                 |
+| G. Hurst                |
+| D. Bumberger            |
+| D. Diaz                 |
+| S. Sarêñkaya            |
+| M. Zapytowski           |
+| A. Pir¡_g               |
+| L. Allan                |
+| D. Valdelamar           |
+| E. Erhahon              |
+| K. Jaksik               |
+| Lucas Ribeiro           |
+| G. Comerford            |
+| B. Y¡‡¡ñez              |
+| H. Stenevik             |
+| M. Kennedy              |
+| S. Sinyan               |
+| K. Yoshio               |
+| R. Rode                 |
+| A. Bahtijar             |
+| N. Kastenhofer          |
+| S. Heil                 |
+| M. Schragl              |
+| P. Selkos               |
+| J. Hanek                |
+| B. Manosalva            |
+| M. Christiansen         |
+| S. Hausner              |
+| L. Pelletier            |
+| T. Herbots              |
+| R. Miura                |
+| M. Matsumoto            |
+| S. Jamieson             |
+| T. Nishiyama            |
+| Felipe Ferreyra         |
+| T. Hara                 |
+| N. Ochojski             |
+| K. Kryg¡®rd             |
+| Cui Jingming            |
+| B. Servania             |
+| L. Langhans             |
+| C. Farren               |
+| K. Yao                  |
+| D. Karimani             |
+| M. Twarowski            |
+| H. Fossdal              |
+| K. Al Mozaibri          |
+| A. Papadopoulos         |
+| P. Buch Christiansen    |
+| K. Shibato              |
+| L. McCarron             |
+| H. Hern¡‡ndez           |
+| M. Bild¡?y              |
+| Wang Min                |
+| Li Fang                 |
+| P. Ouaneh               |
+| S. Arango               |
+| L. Ranger               |
+| L. Moser                |
+| J. Campaz               |
+| Chen Weiming            |
+| K. Lasko?_              |
+| J. Nahr                 |
+| R. Ogle                 |
+| S. Fukahori             |
+| A. Yusuf                |
+| M. Bazi                 |
+| L. Sedlak               |
+| A. Bates                |
+| R. Stewart              |
+| Y. Mustafa              |
+| Wen Zhixiang            |
+| Choi Beom Kyung         |
+| G. Vannucchi            |
+| J. Smylie               |
+| J. Gibson               |
+| Shi Xiaodong            |
+| S. Str¡_zik             |
+| Chen Wei                |
+| Jeong Chung Yeob        |
+| Liu Yu                  |
+| D. Revan                |
+| W. Longbottom           |
+| R. Treacy               |
+| J. Bartels              |
+| M. Hayashi              |
+| A. Rose                 |
+| D. Valencia             |
+| D. Dumont               |
+| Lee Yunoh               |
+| J. Borquez              |
+| S. Byrne                |
+| J. Anziani              |
+| M. Urwin                |
+| A. Ben Lamin            |
+| J. Hoormann             |
+| B. Williams             |
+| A. Jarvis               |
+| M. Casey                |
+| Sun Weizhe              |
+| W. Al Enezi             |
+| F. Langsdorf            |
+| K. McClean              |
+| Zhao Mingyu             |
+| L. Coddington           |
+| J. McGuire              |
+| Yan Hao                 |
+| M. Ozga                 |
+| F. Nicastro             |
+| P. Kekeris              |
+| M. O'Connor             |
+| G. Henriksson           |
+| J. Doyle-Hayes          |
+| S. Gustafsson           |
+| J. Brady                |
+| E. Dubickas             |
+| K. Broda                |
+| L. Brook                |
+| D. Gibbons              |
+| D. Palacios             |
+| M. Knox                 |
+| D. Makoma               |
+| W. D??ugosz             |
+| J. Giraldo              |
+| L. Demaj                |
+| J. King                 |
+| L. Soldini              |
+| M. Al Shudukhi          |
+| J. Skotadis             |
+| M. Bustgaard Larsen     |
+| D. Walters              |
+| C. McLennan             |
+| A. Klimczak             |
+| G. Nyberg               |
+| K. H¡?gh                |
+| B. Gr¡?tterud           |
+| O. K¡®hed               |
+| R. Yamamoto             |
+| P. Sok¡_??              |
+| R. Najjarine            |
+| P. Durin                |
+| J. Olstad               |
+| M. Kaufmann             |
+| E. Bojang               |
+| O. Sahraoui             |
+| O. Jonsson              |
+| B. Slisz                |
+| P. Kirk                 |
+| E. Ceide                |
+| B. Waine                |
+| J. Lambert              |
+| T. Noda                 |
+| S. Nore¡ña              |
+| L. Smyth                |
+| G. Newell               |
+| M. Yêñldêñz             |
+| A. Scott                |
+| B. ?‚ynel               |
+| T. Koch                 |
+| A. Romairone            |
+| T. Hama                 |
+| A. Georgiou             |
+| T. Yasui                |
+| H. Abdulmajeed          |
+| H. Hauso                |
+| J. Stevens              |
+| G. Tolino               |
+| A. McCann               |
+| S. Boyd                 |
+| H. Saruta               |
+| D. Bedoya               |
+| M. K¡_stenbauer         |
+| J. Diaz                 |
+| C. Moore                |
+| D. Mandroiu             |
+| H. Biggins              |
+| K. Yakob                |
+| S. Opsahl               |
+| K. Askildsen            |
+| R. Cunningham           |
+| A. Weidinger            |
+| T. M¡_ller              |
+| A. Stamatelopoulos      |
+| A. Lesiotis             |
+| L. Beckemeyer           |
+| M. Nelson               |
+| M. Boe Mikkelsen        |
+| M. Ormaz¡‡bal           |
+| D. Parkhouse            |
+| C. Hauervig             |
+| W. J¡_¡_skel¡_inen      |
+| C. Ca¡ñizales           |
+| V. Vesiaho              |
+| R. Fujimura             |
+| S. Pryce                |
+| G. Zu¡ñiga              |
+| T. Romboli              |
+| S. Bohan                |
+| F. Gemmi                |
+| J. Brendieck            |
+| A. Mahlonoko            |
+| L. Simpson              |
+| A. Ahl Holmstr¡_m       |
+| E. Gumbs                |
+| G. Tsitaishvili         |
+| N. Corbet               |
+| B. Bytyqi               |
+| M. Al Baqawi            |
+| A. Kappenberger         |
+| C. Guti¡¸rrez           |
+| Jin Qi                  |
+| N. Ziswiler             |
+| Zheng Zhiming           |
+| J. Larsen               |
+| L. Baines               |
+| O. Klitten              |
+| K. Yamada               |
+| C. Walsh-O'Loghlen      |
+| J. Delianov             |
+| J. Riquelme             |
+| K. Kubota               |
+| N. Senoo                |
+| G. Meli                 |
+| G. Severinsen           |
+| E. Damgaard             |
+| M. Boney                |
+| S. Kayembe              |
+| R. Niizato              |
+| F. Tauchhammer          |
+| Zhou Ting               |
+| O. Bj¡_rtuft            |
+| B. Chevreuil            |
+| J. Iaciofano            |
+| Liu Shibo               |
+| N. Baba                 |
+| N. Marthinussen         |
+| D. Murphy               |
+| T. Ko                   |
+| A. Ekblad               |
+| P. Azizi                |
+| K. Sanada               |
+| A. Collins              |
+| J. Sparkes              |
+| F. Bustamante           |
+| P. ?_wiêŸtko            |
+| B. Gradecki             |
+| A. Kn¡_ver              |
+| C. Blues                |
+| N. Hatta                |
+| K. Kouassivi-Benissan   |
+| A. Czaplak              |
+| A. ¡_hman               |
+| R. Millen               |
+| A. Vergara              |
+| R. Sears                |
+| D. Th¡?gersen           |
+| D. Sesay                |
+| F. Norman               |
+| N. Gribenco             |
+| A. Andr¡¸ Jr            |
+| R. Hauge                |
+| T. Nagaishi             |
+| I. Aliu                 |
+| K. Thiesson Kristensen  |
+| J. Cajuste              |
+| M. Tilio                |
+| S. Melvin               |
+| S. Graves               |
+| S. Bareiro              |
+| C. Roma¡ña              |
+| H. R¡_stad              |
+| K. Ram¡¶                |
+| D. Mamaliga             |
+| E. Harloff              |
+| L. Kerrigan             |
+| F. Delaveris            |
+| A. Daniels              |
+| J. Dunn                 |
+| A. Read                 |
+| F. Mortensen            |
+| M. Wolfe                |
+| J. Caldwell             |
+| H. Andersson            |
+| B. Zamora               |
+| B. Taverner             |
+| J. Osobi??ski           |
+| L. Wade-Slater          |
+| T. Stevenson            |
+| S. Twine                |
+| C. McWilliams           |
+| J. Valbuena             |
+| K. Ogudugu              |
+| I. Umbdenstock          |
+| P. Niyongabire          |
+| D. Thiam                |
+| J. Rowland              |
+| W. Dean                 |
+| A. Reghba               |
+| R. Graydon              |
+| J. Conze                |
+| Carlos Mendes Gomes     |
+| D. Hodzic               |
+| T. Nakagawa             |
+| C. ¡™yvann              |
+| L. Brown                |
+| E. McCue                |
+| A. Skindlo              |
+| K. Konstandopoulos      |
+| K. Salazar              |
+| S. Sarri                |
+| O. Schindler            |
+| M. Arena                |
+| L. Cavallini            |
+| B. Hvidt                |
+| S. Pollock              |
+| J. Baxter               |
+| T. Stead                |
+| A. O'Reilly             |
+| Zhang Hengyuan          |
+| C. Royo                 |
+| Ding Bowei              |
+| M. Grabowski            |
+| L. Catherall            |
+| A. Bark                 |
+| L. Hunn                 |
+| C. Pav¡¸z               |
+| T. Harigaya             |
+| Min Gyeong Min          |
+| C. Murphy               |
+| A. B¡_rtelsen           |
+| Lee Dong Hee            |
+| J. Svenningsen          |
+| L. Mwandwe              |
+| G. Smith                |
+| Kim Jong Jin            |
+| T. Schneider            |
+| S. Bugge Jepsen         |
+| F. Murray               |
+| M. Najjar               |
+| J. Harboe               |
+| J. Garc¡_a              |
+| A. McGovern             |
+| A. Delap                |
+| M. Larsen               |
+| E. L¡_pez               |
+| T. Mourdoukoutas        |
+| D. Craddock             |
+| J. Steiger              |
+| L. Sch¡_fl              |
+| O. Urhoghide            |
+| C. Kennedy              |
+| L. Finochietto          |
+| M. Wo?_niak             |
+| B. Reynolds             |
+| J. Szpaderski           |
+| F. Konstandeliasz       |
+| B. Seymour              |
+| R. Grym                 |
+| C. Kelly                |
+| T. Rohde                |
+| J. Pawlik               |
+| H. Kisiel               |
+| S. Laitinen             |
+| L. Jephcott             |
+| J. Imbrechts            |
+| J. O'Keeffe             |
+| J. Heaton               |
+| A. Ammitzb¡?ll          |
+| I. Richards             |
+| J. Ellis                |
+| B. Galach               |
+| W. M¡?ller              |
+| C. Addai                |
+| T. Jacobsen             |
+| J. Adebayo-Smith        |
+| Han Zilong              |
+| B. O'Gorman             |
+| L. Cornic               |
+| A. Ousou                |
+| M. Gudmann              |
+| S. Foss                 |
+| A. Perea                |
+| J. Miszczuk             |
+| A. Mills                |
+| D. Asonganyi            |
+| D. Dillon               |
+| C. Cappis               |
+| Zhang Enge              |
+| B. Hedley               |
+| M. Alvir                |
+| T. Knowles              |
+| S. Parada               |
+| C. Landa                |
+| Zhen'ao Wang            |
+| S. Whaler               |
+| P. Omochere             |
+| J. Morris               |
+| A. Suzuki               |
+| K. Lara                 |
+| M. Humpen¡_der          |
+| K. Civelek              |
+| M. Antkowiak            |
+| N. Suman                |
+| F. N¡?rgaard            |
+| E. Destanoglu           |
+| C. Bj¡_rk               |
+| Teng Shangkun           |
+| H. Wulff                |
+| C. Mesa                 |
+| P. Phillips             |
+| Hong Hyeon Seok         |
+| C. Walsh                |
+| T. Miyamoto             |
+| R. Hurley               |
+| R. Hackett-Fairchild    |
+| L. Klitten              |
+| Zhang Jingyi            |
+| T. Brownsword           |
+| J. Garc¡_a              |
+| E. Dahlqvist            |
+| D. Campbell             |
+| M. Sutton               |
+| C. Hughes               |
+| T. Kawamura             |
+| S. Al Saeed             |
+| B. Horton               |
+| S. B¡_kgaard            |
+| J. Mortensen            |
+| J. Martin               |
+| T. Allarakhia           |
+| M. Tokich               |
+| Kwon Ki Pyo             |
+| J. Foulston             |
+| J. Sheridan             |
+| M. Ichimaru             |
+| R. Shibamoto            |
+| H. Benns                |
+| M. Schantl              |
+| P. Paya                 |
+| G. Barry                |
+| E. Bilen                |
+| M. Al Dhafeeri          |
+| S. Dawood               |
+| J. Granlund             |
+| M. Connor               |
+| Zeng Qingshen           |
+| B. Arapovic             |
+| P. ?‚yra                |
+| J. Hipper               |
+| J. Lynch                |
+| H. Bernat               |
+| V. Smedsrud             |
+| T. Johnson              |
+| J. Cleary               |
+| A. Osmanoski            |
+| J. Kelly                |
+| O. Ollikainen           |
+| G. Tegue                |
+| Chen Zhao               |
+| O. Olsen                |
+| K. Moesgaard            |
+| T. Callens              |
+| D. Collins              |
+| J. Egan                 |
+| B. Buckley              |
+| G. Figliuzzi            |
+| G. Hollywood            |
+| Zhu Jiayi               |
+| B. Sass-Davies          |
+| N. Stephan              |
+| J. Greatorex            |
+| J. James                |
+| F. Sinclair-Smith       |
+| T. O'Connor             |
+| Liu Yaoxin              |
+| M. Finne W¡?rts         |
+| F. Ranocchia            |
+| N. Morahan              |
+| A. Kelsey               |
+| M. Foy                  |
+| Yin Congyao             |
+| Liu Bin                 |
+| K. Hawley               |
+| Chen Yajun              |
+| Li Yuyang               |
+| W. Henry                |
+| J. Garcia Sossa         |
+| M. Harsman              |
+| R. Griffiths            |
+| D. Mackay               |
+| A. Iontton              |
+| W. Appleyard            |
+| C. Levingston           |
+| R. Hughes               |
+| J. Yabur                |
+| M. Dyrmose              |
+| M. Roberts              |
+| Liu Guobo               |
+| J. Devine               |
+| K. Taylor               |
+| T. Lawal                |
+| L. Jagne                |
+| D. Szczepaniak          |
+| P. Wieliczko            |
+| T. Gundelund            |
+| Wang Xin                |
+| M. Fr¡?kj¡_r-Jensen     |
+| H. Norris               |
+| N. Ay¡¸va               |
+| J. Manley               |
+| T. Pugh                 |
+| Nicolas Firmino         |
+| Y. Uchimura             |
+| C. Hawkins              |
+| R. Takae                |
+| S. Adewusi              |
+| E. Clarke               |
+| T. Hillman              |
+| R. Roache               |
+| L. Wahlstedt            |
+| J. Williams             |
+| M. Hurst                |
+| C. Maher                |
+| Y. G¡_ez                |
+| D. Horton               |
+| E. Tweed                |
+| Zhang Yufeng            |
+| C. Ehlich               |
+| L. Collins              |
+| A. Kaltner              |
+| L. Watkins              |
+| J. Norville-Williams    |
+| S. Squire               |
+| N. Fuentes              |
+| J. Milli                |
+| S. Griffin              |
+| K. Fujikawa             |
+| D. Holland              |
+| J. Livesey              |
+| M. Baldisimo            |
+| J. Young                |
+| D. Walsh                |
+| J. Lundstram            |
+| N. Christoffersson      |
+| B. Worman               |
+| D. Walker-Rice          |
+| G. Nugent               |
++-------------------------+
+4770 rows in set (0.10 sec)
+
+mysql> select max(overall) as best_overall_rating,min(overall) as lowest_overall_rating from fifa;
++---------------------+-----------------------+
+| best_overall_rating | lowest_overall_rating |
++---------------------+-----------------------+
+|                  94 |                    46 |
++---------------------+-----------------------+
+1 row in set (0.09 sec)
+
+mysql> select name from fifa where overall=94;
++-------------------+
+| name              |
++-------------------+
+| L. Messi          |
+| Cristiano Ronaldo |
++-------------------+
+2 rows in set (0.09 sec)
+
+mysql> select name from fifa where overall=46;
++-----------+
+| name      |
++-----------+
+| G. Nugent |
++-----------+
+1 row in set (0.09 sec)
+
+mysql> select sum(overall) as total_rating, club from fifa group by club order by total_rating desc limit 3;
++--------------+-------------------+
+| total_rating | club              |
++--------------+-------------------+
+|         2582 | Real Madrid       |
+|         2575 | FC Barcelona      |
+|         2549 | Manchester United |
++--------------+-------------------+
+3 rows in set (0.37 sec)
+
+mysql> select avg(overall) as average_rating, club from fifa group by club;
++----------------+-------------------------------------+
+| average_rating | club                                |
++----------------+-------------------------------------+
+|        78.0303 | FC Barcelona                        |
+|        82.2800 | Juventus                            |
+|        77.4333 | Paris Saint-Germain                 |
+|        77.2424 | Manchester United                   |
+|        76.7273 | Manchester City                     |
+|        76.5938 | Chelsea                             |
+|        78.2424 | Real Madrid                         |
+|        75.0606 | Atl¡¸tico Madrid                    |
+|        76.6071 | FC Bayern M¡_nchen                  |
+|        76.6970 | Tottenham Hotspur                   |
+|        76.0000 | Liverpool                           |
+|        80.0417 | Napoli                              |
+|        75.1818 | Arsenal                             |
+|        79.6190 | Inter                               |
+|        76.4000 | Lazio                               |
+|        75.2500 | Borussia Dortmund                   |
+|        62.6207 | Vissel Kobe                         |
+|        73.4828 | Olympique Lyonnais                  |
+|        77.4000 | Roma                                |
+|        74.8333 | Valencia CF                         |
+|        76.8846 | FC Porto                            |
+|        74.3214 | FC Schalke 04                       |
+|        72.0385 | Be?“ikta?“ JK                       |
+|        68.2400 | LA Galaxy                           |
+|        76.1071 | Sporting CP                         |
+|        75.0000 | Real Betis                          |
+|        73.8571 | Olympique de Marseille              |
+|        72.2258 | RC Celta                            |
+|        75.9600 | Bayer 04 Leverkusen                 |
+|        72.3793 | Real Sociedad                       |
+|        74.6774 | Villarreal CF                       |
+|        75.0714 | Sevilla FC                          |
+|        77.0741 | SL Benfica                          |
+|        70.4545 | AS Saint-¡?tienne                   |
+|        72.9394 | AS Monaco                           |
+|        73.8438 | Leicester City                      |
+|        72.3000 | Atalanta                            |
+|        73.3500 | Gr¡Ômio                             |
+|        73.4500 | Atl¡¸tico Mineiro                   |
+|        73.1071 | RB Leipzig                          |
+|        73.6333 | Ajax                                |
+|        60.0800 | Dalian YiFang FC                    |
+|        74.1667 | Everton                             |
+|        77.5417 | Milan                               |
+|        73.0938 | West Ham United                     |
+|        70.7857 | 1. FC K¡_ln                         |
+|        73.1250 | TSG 1899 Hoffenheim                 |
+|        63.4643 | Shanghai SIPG FC                    |
+|        72.5000 | OGC Nice                            |
+|        65.6429 | Al Nassr                            |
+|        67.8667 | Wolverhampton Wanderers             |
+|        73.2000 | Borussia M¡_nchengladbach           |
+|        71.1667 | Hertha BSC                          |
+|        72.0000 | SV Werder Bremen                    |
+|        72.4000 | Cruzeiro                            |
+|        73.8065 | Athletic Club de Bilbao             |
+|        72.5455 | Torino                              |
+|        70.5385 | Medipol Ba?“ak?“ehir FK             |
+|        64.8571 | Beijing Sinobo Guoan FC             |
+|        70.4839 | Crystal Palace                      |
+|        68.7857 | PFC CSKA Moscow                     |
+|        72.6250 | VfL Wolfsburg                       |
+|        72.8214 | Shakhtar Donetsk                    |
+|        66.6667 | Toronto FC                          |
+|        72.3214 | Lokomotiv Moscow                    |
+|        72.1667 | Sassuolo                            |
+|        66.7917 | New York City FC                    |
+|        72.1000 | Fluminense                          |
+|        71.7667 | PSV                                 |
+|        72.2759 | Levante UD                          |
+|        68.3704 | Fulham                              |
+|        72.3448 | Watford                             |
+|        66.6552 | Atlanta United                      |
+|        70.0000 | Montpellier HSC                     |
+|        70.3929 | Galatasaray SK                      |
+|        72.8889 | Fenerbah¡_e SK                      |
+|        73.3846 | SD Eibar                            |
+|        67.8261 | Los Angeles FC                      |
+|        71.9524 | Sampdoria                           |
+|        68.3103 | Al Hilal                            |
+|        72.5000 | VfB Stuttgart                       |
+|        74.8462 | SC Braga                            |
+|        70.9167 | River Plate                         |
+|        73.3750 | Deportivo Alav¡¸s                   |
+|        72.7500 | Eintracht Frankfurt                 |
+|        71.4615 | Girona FC                           |
+|        60.6667 | Guangzhou R&F; FC                   |
+|        70.7576 | Burnley                             |
+|        70.1852 | Stoke City                          |
+|        71.2813 | Southampton                         |
+|        60.5385 | Tianjin Quanjian FC                 |
+|        72.9200 | Getafe CF                           |
+|        60.1852 | Beijing Renhe FC                    |
+|        65.6786 | Montreal Impact                     |
+|        70.8462 | Chievo Verona                       |
+|        72.2632 | Genoa                               |
+|        66.2308 | Portland Timbers                    |
+|        69.5000 | Tigres U.A.N.L.                     |
+|        71.4286 | RCD Espanyol                        |
+|        64.1429 | Hebei China Fortune FC              |
+|        73.4348 | Cagliari                            |
+|        66.0870 | Chicago Fire                        |
+|        67.1538 | DC United                           |
+|        64.2333 | Sagan Tosu                          |
+|        71.3571 | Dynamo Kyiv                         |
+|        70.2000 | Santos                              |
+|        73.2500 | Internacional                       |
+|        70.1500 | Am¡¸rica FC (Minas Gerais)          |
+|        71.6923 | Independiente                       |
+|        73.5833 | Boca Juniors                        |
+|        69.8696 | Cruz Azul                           |
+|        70.6452 | 1. FSV Mainz 05                     |
+|        69.8750 | Bournemouth                         |
+|        73.1852 | Spartak Moscow                      |
+|        70.4231 | Racing Club                         |
+|        70.0645 | FC Augsburg                         |
+|        72.7619 | Fiorentina                          |
+|        70.0357 | FC Nantes                           |
+|        70.4074 | Feyenoord                           |
+|        71.6786 | Club Brugge KV                      |
+|        70.9375 | Brighton & Hove Albion              |
+|        65.3846 | Guangzhou Evergrande Taobao FC      |
+|        65.7000 | Al Ahli                             |
+|        60.7857 | Jiangsu Suning FC                   |
+|        70.2000 | SC Freiburg                         |
+|        72.4444 | PAOK                                |
+|        71.3462 | Stade Rennais FC                    |
+|        69.5926 | Trabzonspor                         |
+|        71.0952 | SPAL                                |
+|        68.8400 | Portimonense SC                     |
+|        72.5000 | Olympiacos CFP                      |
+|        67.2174 | Club Atl¡¸tico Hurac¡‡n             |
+|        67.5714 | Kasimpa?“a SK                       |
+|        70.5161 | Newcastle United                    |
+|        65.8929 | Quer¡¸taro                          |
+|        71.2400 | KRC Genk                            |
+|        70.6154 | Hannover 96                         |
+|        68.7200 | Stade Malherbe Caen                 |
+|        64.6786 | Godoy Cruz                          |
+|        70.0333 | Toulouse Football Club              |
+|        70.2222 | RSC Anderlecht                      |
+|        68.7742 | Huddersfield Town                   |
+|        67.6316 | CD Tondela                          |
+|        67.6923 | Seattle Sounders FC                 |
+|        68.1481 | Hamburger SV                        |
+|        69.3704 | FC Red Bull Salzburg                |
+|        68.7826 | Rio Ave FC                          |
+|        71.2857 | FC Girondins de Bordeaux            |
+|        64.0500 | Melbourne Victory                   |
+|        70.1000 | Parma                               |
+|        68.7778 | FC Basel 1893                       |
+|        64.3077 | Al Wehda                            |
+|        66.7083 | BSC Young Boys                      |
+|        69.9630 | KAA Gent                            |
+|        66.0000 | Al Ittihad                          |
+|        70.7600 | Standard de Li¡¶ge                  |
+|        63.0385 | Shanghai Greenland Shenhua FC       |
+|        68.2143 | Colo-Colo                           |
+|        67.7143 | Junior FC                           |
+|        69.2143 | West Bromwich Albion                |
+|        68.9630 | RC Strasbourg Alsace                |
+|        68.4286 | G¡_ztepe SK                         |
+|        67.7037 | Deportivo Cali                      |
+|        67.0000 | Deportivo Toluca                    |
+|        73.2500 | Bologna                             |
+|        62.7037 | Nagoya Grampus                      |
+|        68.4000 | Amiens SC                           |
+|        61.4815 | Changchun Yatai FC                  |
+|        68.0769 | Club Atl¡¸tico Lan¡_s               |
+|        71.3000 | Botafogo                            |
+|        69.3793 | Club Am¡¸rica                       |
+|        71.9643 | Udinese                             |
+|        68.7273 | Real Valladolid CF                  |
+|        70.3182 | CD Legan¡¸s                         |
+|        66.0435 | Club Atl¡¸tico Banfield             |
+|        71.6154 | Celtic                              |
+|        72.2593 | Vit¡_ria Guimar¡œes                 |
+|        68.3913 | FC K¡?benhavn                       |
+|        70.1154 | UD Las Palmas                       |
+|        70.9583 | Deportivo de La Coru¡ña             |
+|        65.9200 | Universidad Cat¡_lica               |
+|        68.8148 | San Lorenzo de Almagro              |
+|        69.0000 | Rayo Vallecano                      |
+|        69.1923 | Monterrey                           |
+|        68.0400 | Columbus Crew SC                    |
+|        69.0714 | MKE Ankarag¡_c¡_                    |
+|        63.0400 | Guizhou Hengfeng FC                 |
+|        68.4138 | Swansea City                        |
+|        59.2857 | Tianjin TEDA FC                     |
+|        60.8571 | Chongqing Dangdai Lifan FC SWM Team |
+|        70.2143 | AEK Athens                          |
+|        62.5000 | Al Taawoun                          |
+|        62.8696 | Melbourne City FC                   |
+|        71.2800 | En Avant de Guingamp                |
+|        69.1154 | Akhisar Belediyespor                |
+|        64.2000 | Foggia                              |
+|        69.5417 | LOSC Lille                          |
+|        70.0435 | Clube Sport Mar¡_timo               |
+|        68.0000 | Real Sporting de Gij¡_n             |
+|        64.9167 | BB Erzurumspor                      |
+|        63.1111 | Shandong Luneng TaiShan FC          |
+|        70.1000 | Bahia                               |
+|        64.7308 | Once Caldas                         |
+|        65.2083 | FC Groningen                        |
+|        70.0714 | Angers SCO                          |
+|        68.7000 | Paran¡‡                             |
+|        67.1724 | Antalyaspor                         |
+|        66.0000 | Minnesota United FC                 |
+|        66.7692 | Club Le¡_n                          |
+|        68.1379 | Empoli                              |
+|        67.4483 | Leeds United                        |
+|        69.4167 | Viktoria Plze??                     |
+|        67.6786 | Alanyaspor                          |
+|        69.2917 | Frosinone                           |
+|        69.6000 | Atl¡¸tico Paranaense                |
+|        68.9286 | Derby County                        |
+|        65.3000 | Kawasaki Frontale                   |
+|        67.6000 | Aston Villa                         |
+|        67.7857 | Guadalajara                         |
+|        70.3462 | Dijon FCO                           |
+|        69.0435 | Santos Laguna                       |
+|        70.4000 | Vit¡_ria                            |
+|        66.6667 | ¡?aykur Rizespor                    |
+|        66.2308 | U.N.A.M.                            |
+|        70.2800 | Nottingham Forest                   |
+|        69.6667 | Royal Antwerp FC                    |
+|        65.3214 | Club Tijuana                        |
+|        69.4000 | Sport Club do Recife                |
+|        66.1000 | Real Salt Lake                      |
+|        69.9655 | AZ Alkmaar                          |
+|        68.6786 | SK Slavia Praha                     |
+|        64.8462 | Willem II                           |
+|        67.4000 | Middlesbrough                       |
+|        70.1786 | Dinamo Zagreb                       |
+|        64.9630 | Club Atlas                          |
+|        66.2917 | Granada CF                          |
+|        62.0870 | Sydney FC                           |
+|        67.6296 | Sporting Kansas City                |
+|        66.8750 | SV Zulte-Waregem                    |
+|        70.2000 | M¡‡laga CF                          |
+|        68.2143 | Real Oviedo                         |
+|        66.5556 | Pachuca                             |
+|        68.5185 | Boavista FC                         |
+|        69.7037 | Atiker Konyaspor                    |
+|        66.7778 | Kaizer Chiefs                       |
+|        70.4800 | GD Chaves                           |
+|        67.8929 | Palermo                             |
+|        66.2308 | Atl¡¸tico Nacional                  |
+|        64.8000 | Puebla FC                           |
+|        63.6800 | Perth Glory                         |
+|        67.1786 | Panathinaikos FC                    |
+|        64.4615 | FC Sion                             |
+|        66.5357 | New York Red Bulls                  |
+|        63.2333 | Al Shabab                           |
+|        67.4815 | Club Atl¡¸tico Col¡_n               |
+|        66.0000 | Monarcas Morelia                    |
+|        65.7727 | Albacete BP                         |
+|        69.3913 | Rangers FC                          |
+|        67.6429 | Sparta Praha                        |
+|        65.6071 | Philadelphia Union                  |
+|        68.0385 | Legia Warszawa                      |
+|        65.4074 | Urawa Red Diamonds                  |
+|        66.3200 | Rosario Central                     |
+|        67.3929 | Stade de Reims                      |
+|        66.3200 | ADO Den Haag                        |
+|        69.7500 | Chapecoense                         |
+|        66.3333 | FC Midtjylland                      |
+|        65.7308 | San Jose Earthquakes                |
+|        67.7097 | Cardiff City                        |
+|        64.8636 | Belgrano de C¡_rdoba                |
+|        68.5600 | 1. FC N¡_rnberg                     |
+|        65.9600 | Brescia                             |
+|        65.3000 | Kashima Antlers                     |
+|        68.5769 | Vit¡_ria de Set¡_bal                |
+|        62.7826 | CD Everton de Vi¡ña del Mar         |
+|        67.8966 | Fortuna D¡_sseldorf                 |
+|        66.7000 | SD Huesca                           |
+|        66.2069 | Preston North End                   |
+|        65.9167 | Club Atl¡¸tico Talleres             |
+|        68.1579 | Benevento                           |
+|        65.2000 | Gimnasia y Esgrima La Plata         |
+|        65.4828 | Houston Dynamo                      |
+|        65.1667 | Club Necaxa                         |
+|        68.8929 | Norwich City                        |
+|        65.0769 | Holstein Kiel                       |
+|        61.8966 | Ettifaq FC                          |
+|        68.3043 | Kayserispor                         |
+|        65.7500 | 1. FC Heidenheim 1846               |
+|        67.7600 | Vitesse                             |
+|        66.3793 | Brentford                           |
+|        65.3103 | Yeni Malatyaspor                    |
+|        67.7000 | Cear¡‡ Sporting Club                |
+|        66.4333 | FC Ingolstadt 04                    |
+|        66.3846 | Estudiantes de La Plata             |
+|        65.0741 | AIK                                 |
+|        65.6296 | Queens Park Rangers                 |
+|        66.2222 | Suwon Samsung Bluewings             |
+|        65.2917 | Heart of Midlothian                 |
+|        67.4828 | Reading                             |
+|        65.4483 | FC Dallas                           |
+|        65.5172 | Heracles Almelo                     |
+|        66.8400 | Bursaspor                           |
+|        65.6087 | Venezia FC                          |
+|        66.9231 | CD Lugo                             |
+|        60.6154 | Henan Jianye FC                     |
+|        65.8333 | Orlando City SC                     |
+|        68.3333 | CA Osasuna                          |
+|        63.4400 | Livorno                             |
+|        68.6429 | Universidad de Chile                |
+|        65.2800 | Br¡?ndby IF                         |
+|        63.9565 | Aberdeen                            |
+|        67.6667 | Defensa y Justicia                  |
+|        67.3077 | Atl¡¸tico Tucum¡‡n                  |
+|        65.2963 | Blackburn Rovers                    |
+|        66.9200 | SV Darmstadt 98                     |
+|        69.0000 | Moreirense FC                       |
+|        64.1154 | Sanfrecce Hiroshima                 |
+|        67.5000 | CD Numancia                         |
+|        67.0833 | KV Oostende                         |
+|        66.0769 | Vancouver Whitecaps FC              |
+|        63.3704 | Odense Boldklub                     |
+|        66.9615 | SC Heerenveen                       |
+|        64.8519 | Racing Club de Lens                 |
+|        67.3704 | Independiente Santa Fe              |
+|        66.7692 | Sporting de Charleroi               |
+|        66.9259 | Millonarios FC                      |
+|        67.8621 | Sheffield Wednesday                 |
+|        65.0000 | Perugia                             |
+|        60.9259 | Daegu FC                            |
+|        65.2500 | V¡¸lez Sarsfield                    |
+|        62.9583 | Grasshopper Club Z¡_rich            |
+|        66.7692 | Sivasspor                           |
+|        66.5385 | Rosenborg BK                        |
+|        65.1200 | SK Sturm Graz                       |
+|        68.4000 | FC Metz                             |
+|        66.2083 | CD Universidad de Concepci¡_n       |
+|        63.5217 | Brisbane Roar                       |
+|        68.5000 | CD Feirense                         |
+|        65.9643 | Hull City                           |
+|        60.9200 | Neuch¡½tel Xamax                    |
+|        67.9259 | Real Zaragoza                       |
+|        68.6400 | CD Aves                             |
+|        64.9259 | Millwall                            |
+|        66.0435 | Uni¡_n de Santa Fe                  |
+|        66.5455 | KAS Eupen                           |
+|        66.9615 | C¡‡diz CF                           |
+|        67.2069 | CD Tenerife                         |
+|        67.9200 | 1. FC Union Berlin                  |
+|        64.3750 | Al Fayha                            |
+|        66.2308 | AJ Auxerre                          |
+|        67.7391 | N¡ªmes Olympique                    |
+|        64.3333 | Patriotas Boyac¡‡ FC                |
+|        65.2000 | Molde FK                            |
+|        66.7333 | Bristol City                        |
+|        68.3077 | CD Nacional                         |
+|        67.2857 | Sporting Lokeren                    |
+|        66.5862 | FC St. Pauli                        |
+|        63.4615 | Deportes Iquique                    |
+|        62.6071 | Al Qadisiyah                        |
+|        66.1154 | Sheffield United                    |
+|        65.6957 | Lobos BUAP                          |
+|        68.3478 | FC Utrecht                          |
+|        67.0800 | Club Atl¡¸tico Tigre                |
+|        65.2917 | FK Austria Wien                     |
+|        65.1429 | Patronato                           |
+|        66.6538 | Malm¡_ FF                           |
+|        63.6071 | Kashiwa Reysol                      |
+|        67.2632 | US Cremonese                        |
+|        66.8000 | VfL Bochum 1848                     |
+|        66.8889 | SK Rapid Wien                       |
+|        66.8947 | Hellas Verona                       |
+|        65.3462 | Rionegro ¡?guilas                   |
+|        64.0400 | Lecce                               |
+|        68.2609 | Santa Clara                         |
+|        62.1111 | BK H¡_cken                          |
+|        64.6667 | New England Revolution              |
+|        66.3214 | Orlando Pirates                     |
+|        61.1071 | Atl¡¸tico Huila                     |
+|        61.8400 | Western Sydney Wanderers            |
+|        62.2222 | Kalmar FF                           |
+|        63.6296 | Independiente Medell¡_n             |
+|        65.2692 | Lech Pozna??                        |
+|        63.6400 | Djurg¡®rdens IF                     |
+|        65.0000 | CF Reus Deportiu                    |
+|        63.5769 | SK Brann                            |
+|        65.7778 | Ulsan Hyundai FC                    |
+|        67.3200 | Sint-Truidense VV                   |
+|        61.0000 | Al Fateh                            |
+|        64.5200 | Royal Excel Mouscron                |
+|        64.8182 | AC Ajaccio                          |
+|        66.3810 | PEC Zwolle                          |
+|        64.8846 | Sunderland                          |
+|        65.9130 | Club Atl¡¸tico Aldosivi             |
+|        67.7391 | US Salernitana 1919                 |
+|        64.0357 | FC Lorient                          |
+|        64.2308 | Argentinos Juniors                  |
+|        67.6154 | AD Alcorc¡_n                        |
+|        66.1500 | Crotone                             |
+|        65.0435 | Excelsior                           |
+|        66.7826 | Gimn¡‘stic de Tarragona             |
+|        63.1071 | FC Tokyo                            |
+|        67.0741 | KV Kortrijk                         |
+|        64.3750 | IFK Norrk¡_ping                     |
+|        61.4000 | Adelaide United                     |
+|        63.6190 | FC St. Gallen                       |
+|        64.0000 | Tiburones Rojos de Veracruz         |
+|        64.8696 | CD Palestino                        |
+|        64.7037 | Jeju United FC                      |
+|        65.7857 | Deportes Tolima                     |
+|        66.6667 | Jeonbuk Hyundai Motors              |
+|        66.8519 | Birmingham City                     |
+|        64.0833 | Am¡¸rica de Cali                    |
+|        63.8889 | La Equidad                          |
+|        65.3200 | Spezia                              |
+|        61.4800 | Aalborg BK                          |
+|        64.2000 | Le Havre AC                         |
+|        65.8500 | KSV Cercle Brugge                   |
+|        61.2308 | G¡_rnik Zabrze                      |
+|        65.9600 | Wigan Athletic                      |
+|        64.2222 | Jagiellonia Bia??ystok              |
+|        64.8214 | Cittadella                          |
+|        64.2727 | Hibernian                           |
+|        62.2800 | FC Lugano                           |
+|        64.9600 | San Mart¡_n de San Juan             |
+|        63.2917 | Str¡?msgodset IF                    |
+|        66.1154 | Newell's Old Boys                   |
+|        62.9000 | Al Faisaly                          |
+|        66.1364 | Colorado Rapids                     |
+|        63.0000 | IF Elfsborg                         |
+|        67.3704 | SV Sandhausen                       |
+|        60.5200 | Al Batin                            |
+|        64.1000 | VVV-Venlo                           |
+|        65.3750 | Stade Brestois 29                   |
+|        65.2400 | UD Almer¡_a                         |
+|        62.1481 | Gyeongnam FC                        |
+|        61.4643 | Yokohama F. Marinos                 |
+|        62.5217 | Kilmarnock                          |
+|        65.8095 | Pescara                             |
+|        62.8333 | Newcastle Jets                      |
+|        60.6087 | Central Coast Mariners              |
+|        65.7826 | C¡_rdoba CF                         |
+|        65.2800 | RCD Mallorca                        |
+|        63.8077 | Hammarby IF                         |
+|        64.1379 | Cerezo Osaka                        |
+|        63.8889 | KFC Uerdingen 05                    |
+|        62.6207 | Shimizu S-Pulse                     |
+|        66.4615 | MSV Duisburg                        |
+|        68.0000 | Os Belenenses                       |
+|        66.7407 | DSC Arminia Bielefeld               |
+|        65.9615 | Ipswich Town                        |
+|        65.5926 | FC Seoul                            |
+|        64.2593 | Lechia Gda??sk                      |
+|        61.1333 | Gamba Osaka                         |
+|        66.5000 | CF Rayo Majadahonda                 |
+|        63.5652 | Carpi                               |
+|        62.9565 | LASK Linz                           |
+|        66.0400 | Bolton Wanderers                    |
+|        61.6154 | Al Raed                             |
+|        65.2400 | Extremadura UD                      |
+|        63.7241 | SC Paderborn 07                     |
+|        62.0500 | Wellington Phoenix                  |
+|        62.7037 | Uni¡_n Espa¡ñola                    |
+|        63.6296 | Alianza Petrolera                   |
+|        61.8846 | Cracovia                            |
+|        64.6071 | Gangwon FC                          |
+|        60.4828 | J¡_bilo Iwata                       |
+|        66.1304 | Elche CF                            |
+|        62.0400 | AS B¡¸ziers                         |
+|        62.3636 | La Berrichonne de Ch¡½teauroux      |
+|        63.8182 | Clermont Foot 63                    |
+|        66.2500 | ESTAC Troyes                        |
+|        64.0769 | Pohang Steelers                     |
+|        60.3462 | ¡_rebro SK                          |
+|        62.1111 | Arka Gdynia                         |
+|        65.8519 | SG Dynamo Dresden                   |
+|        65.7917 | SpVgg Greuther F¡_rth               |
+|        62.4615 | Wis??a Krak¡_w                      |
+|        61.1600 | Stab¡_k Fotball                     |
+|        62.5600 | Eintracht Braunschweig              |
+|        62.8846 | Valenciennes FC                     |
+|        60.9615 | FC Thun                             |
+|        63.2500 | San Luis de Quillota                |
+|        65.2000 | Fortuna Sittard                     |
+|        65.7600 |  SSV Jahn Regensburg                |
+|        60.9630 | FC Nordsj¡_lland                    |
+|        64.9630 | FC Erzgebirge Aue                   |
+|        64.1429 | Jeonnam Dragons                     |
+|        61.5385 | Wolfsberger AC                      |
+|        62.8148 | Chamois Niortais Football Club      |
+|        62.5385 | Club Deportes Temuco                |
+|        64.5172 | AS Nancy Lorraine                   |
+|        63.7407 | Red Star FC                         |
+|        61.9231 | Al Hazem                            |
+|        64.0800 | Pogo?? Szczecin                     |
+|        63.2500 | Charlton Athletic                   |
+|        64.6000 | Grenoble Foot 38                    |
+|        62.9565 | FC Hansa Rostock                    |
+|        65.3333 | San Martin de Tucum¡‡n              |
+|        63.1429 | Incheon United FC                   |
+|        62.2083 | ?_lêŸsk Wroc??aw                    |
+|        62.5909 | GFC Ajaccio                         |
+|        63.3846 | 1. FC Kaiserslautern                |
+|        64.3333 | Waasland-Beveren                    |
+|        63.5357 | Deportivo Pasto                     |
+|        60.8636 | Lincoln City                        |
+|        62.1538 | Motherwell                          |
+|        64.0952 | Rotherham United                    |
+|        61.3200 | Burton Albion                       |
+|        61.0800 | Wis??a P??ock                       |
+|        60.7600 | CD Huachipato                       |
+|        61.6400 | FC Wacker Innsbruck                 |
+|        63.0000 | Atl¡¸tico Bucaramanga               |
+|        63.5217 | Peterborough United                 |
+|        65.5769 | Ascoli                              |
+|        63.1481 | FC Z¡_rich                          |
+|        61.2609 | Fleetwood Town                      |
+|        65.6190 | Padova                              |
+|        65.0435 | SV Wehen Wiesbaden                  |
+|        61.3500 | FC Sochaux-Montb¡¸liard             |
+|        64.3500 | Uni¡_n La Calera                    |
+|        61.3913 | Scunthorpe United                   |
+|        63.7917 | NAC Breda                           |
+|        65.7917 | 1. FC Magdeburg                     |
+|        63.2800 | CD O'Higgins                        |
+|        64.2000 | CD Antofagasta                      |
+|        63.1200 | Plymouth Argyle                     |
+|        61.2692 | Aarhus GF                           |
+|        61.2273 | Lillestr¡?m SK                      |
+|        63.4074 | Karlsruher SC                       |
+|        61.6522 | GIF Sundsvall                       |
+|        61.9630 | FC Emmen                            |
+|        61.6538 | Barnsley                            |
+|        63.5200 | Audax Italiano                      |
+|        60.2500 | V-Varen Nagasaki                    |
+|        63.7273 | Paris FC                            |
+|        61.2400 | SpVgg Unterhaching                  |
+|        61.3333 | Hobro IK                            |
+|        63.6207 | De Graafschap                       |
+|        61.4815 | Hokkaido Consadole Sapporo          |
+|        62.7000 | Troms¡? IL                          |
+|        63.8800 | FC Luzern                           |
+|        61.8500 | FK Haugesund                        |
+|        62.6538 | Zag??ê¯bie Lubin                    |
+|        62.5000 | VfR Aalen                           |
+|        61.7391 | Dundalk                             |
+|        62.8462 | Piast Gliwice                       |
+|        60.8182 | Ohod Club                           |
+|        63.4500 | ¡_stersunds FK                      |
+|        60.4545 | Crawley Town                        |
+|        62.1923 | FC Admira Wacker M¡_dling           |
+|        61.6800 | V¡®lerenga Fotball                  |
+|        62.0435 | Oxford United                       |
+|        61.2273 | Dundee FC                           |
+|        63.5000 | Portsmouth                          |
+|        61.2857 | Envigado FC                         |
+|        62.6000 | Mied?_ Legnica                      |
+|        62.2609 | Odds BK                             |
+|        62.4400 | SC Fortuna K¡_ln                    |
+|        62.7727 | Cosenza                             |
+|        63.6500 | US Orl¡¸ans Loiret Football         |
+|        62.7692 | Sarpsborg 08 FF                     |
+|        62.8077 | Jaguares de C¡_rdoba                |
+|        62.2083 | Bradford City                       |
+|        61.8800 | St. Johnstone FC                    |
+|        59.8462 | Boyac¡‡ Chic¡_ FC                   |
+|        62.8462 | SV Mattersburg                      |
+|        62.2500 | Luton Town                          |
+|        62.7391 | Kristiansund BK                     |
+|        60.5000 | Sangju Sangmu FC                    |
+|        63.3043 | Walsall                             |
+|        61.3704 | Korona Kielce                       |
+|        60.2593 | Shonan Bellmare                     |
+|        62.1538 | FC W¡_rzburger Kickers              |
+|        63.1250 | FSV Zwickau                         |
+|        60.0909 | St. Mirren                          |
+|        60.2727 | AC Horsens                          |
+|        59.1600 | HJK Helsinki                        |
+|        61.5500 | Accrington Stanley                  |
+|        63.3200 | Southend United                     |
+|        61.3462 | Bristol Rovers                      |
+|        58.7500 | Hamilton Academical FC              |
+|        61.7917 | TSV 1860 M¡_nchen                   |
+|        62.4000 | Curic¡_ Unido                       |
+|        63.0800 | SCR Altach                          |
+|        61.1304 | Ranheim Fotball                     |
+|        58.0385 | Stevenage                           |
+|        62.7917 | SG Sonnenhof Gro¡“aspach            |
+|        60.2632 | Oldham Athletic                     |
+|        62.2222 | Milton Keynes Dons                  |
+|        60.5926 | FK Bod¡?/Glimt                      |
+|        62.0370 | SC Preu¡“en M¡_nster                |
+|        60.2222 | Vejle Boldklub                      |
+|        61.5652 | Vegalta Sendai                      |
+|        61.6667 | Bury                                |
+|        61.3750 | Randers FC                          |
+|        62.0000 | VfL Osnabr¡_ck                      |
+|        60.3333 | S¡?nderjyskE                        |
+|        60.6957 | IFK G¡_teborg                       |
+|        61.3600 | Mansfield Town                      |
+|        61.6538 | Coventry City                       |
+|        59.6087 | Esbjerg fB                          |
+|        57.0000 | Waterford FC                        |
+|        60.9167 | Shrewsbury                          |
+|        62.3333 | IK Start                            |
+|        62.5000 | Rochdale                            |
+|        60.3333 | Gillingham                          |
+|        61.8214 | FC Energie Cottbus                  |
+|        61.3462 | FC Carl Zeiss Jena                  |
+|        62.1250 | Hallescher FC                       |
+|        63.8095 | Wycombe Wanderers                   |
+|        60.3810 | AFC Wimbledon                       |
+|        61.1739 | Blackpool                           |
+|        61.3600 | Doncaster Rovers                    |
+|        60.4091 | Sandefjord Fotball                  |
+|        61.9630 | VfL Sportfreunde Lotte              |
+|        60.8421 | Cheltenham Town                     |
+|        61.4815 | IK Sirius                           |
+|        60.9615 | Vendsyssel FF                       |
+|        59.2273 | Swindon Town                        |
+|        61.2800 | SV Meppen                           |
+|        61.2174 | Notts County                        |
+|        61.6154 | SKN St. P¡_lten                     |
+|        60.0000 | Exeter City                         |
+|        58.9630 | Northampton Town                    |
+|        60.0909 | Shamrock Rovers                     |
+|        60.7143 | Colchester United                   |
+|        60.1667 | Livingston FC                       |
+|        60.6957 | TSV Hartberg                        |
+|        58.0400 | Tranmere Rovers                     |
+|        57.2593 | Cambridge United                    |
+|        59.2857 | Grimsby Town                        |
+|        60.8182 | Port Vale                           |
+|        60.6923 | Itag¡_¡_ Leones FC                  |
+|        61.7368 | Forest Green Rovers                 |
+|        59.4737 | Dalkurd FF                          |
+|        60.6250 | Zag??ê¯bie Sosnowiec                |
+|        59.2222 | Carlisle United                     |
+|        59.6800 | Trelleborgs FF                      |
+|        57.7826 | St. Patrick's Athletic              |
+|        56.9600 | Morecambe                           |
+|        58.3600 | Cork City                           |
+|        59.8000 | IF Brommapojkarna                   |
+|        56.6667 | Crewe Alexandra                     |
+|        60.9545 | Yeovil Town                         |
+|        55.0000 | Bohemian FC                         |
+|        59.1905 | Macclesfield Town                   |
+|        59.0455 | Newport County                      |
+|        56.6316 | Sligo Rovers                        |
+|        55.5882 | Derry City                          |
+|        54.5263 | Limerick FC                         |
+|        53.6522 | Bray Wanderers                      |
++----------------+-------------------------------------+
+651 rows in set (0.35 sec)
+
+mysql> select avg(overall) as average_rating, club from fifa group by club order by average_rating desc limit 1;
++----------------+----------+
+| average_rating | club     |
++----------------+----------+
+|        82.2800 | Juventus |
++----------------+----------+
+1 row in set (0.36 sec)
+
+mysql> select avg(overall) as average_rating, club from fifa group by club order by average_rating desc limit 5;
++----------------+--------------+
+| average_rating | club         |
++----------------+--------------+
+|        82.2800 | Juventus     |
+|        80.0417 | Napoli       |
+|        79.6190 | Inter        |
+|        78.2424 | Real Madrid  |
+|        78.0303 | FC Barcelona |
++----------------+--------------+
+5 rows in set (0.35 sec)
+
+mysql> select count(*) as freq, preferred_foot from fifa group by preferred_foot;
++-------+----------------+
+| freq  | preferred_foot |
++-------+----------------+
+|  3820 | Left           |
+| 12823 | Right          |
++-------+----------------+
+2 rows in set (0.44 sec)
+
+mysql> select min(penalties) from fifa;
++----------------+
+| min(penalties) |
++----------------+
+|            110 |
++----------------+
+1 row in set (0.10 sec)
+
+mysql> select name from fifa where penalties=110;
++---------------+
+| name          |
++---------------+
+| B. Al Mutairi |
+| K. Yamaguchi  |
++---------------+
+2 rows in set (0.10 sec)
+
+mysql> select count(*) as freq, nationality from fifa where club like "M%" group by nationality; 
++------+---------------------+
+| freq | nationality         |
++------+---------------------+
+|   30 | Spain               |
+|    8 | Belgium             |
+|   18 | Argentina           |
+|   34 | France              |
+|   20 | Germany             |
+|   14 | Portugal            |
+|   19 | Brazil              |
+|  140 | England             |
+|    3 | Algeria             |
+|    6 | Chile               |
+|    4 | Serbia              |
+|   18 | Italy               |
+|    1 | Bosnia Herzegovina  |
+|    2 | Ivory Coast         |
+|    3 | Ecuador             |
+|   29 | Turkey              |
+|    3 | Switzerland         |
+|   24 | Sweden              |
+|    1 | Togo                |
+|    9 | Uruguay             |
+|    2 | Japan               |
+|    2 | Tunisia             |
+|    3 | Paraguay            |
+|    3 | Croatia             |
+|   28 | Colombia            |
+|   32 | Mexico              |
+|    1 | Burkina Faso        |
+|    5 | Denmark             |
+|    1 | Congo               |
+|    1 | South Africa        |
+|    1 | Moldova             |
+|    4 | Cameroon            |
+|    1 | DR Congo            |
+|   16 | Norway              |
+|    7 | Morocco             |
+|    2 | Venezuela           |
+|    7 | Republic of Ireland |
+|    2 | Czech Republic      |
+|    1 | Comoros             |
+|    4 | Peru                |
+|    1 | Trinidad & Tobago   |
+|    4 | Finland             |
+|    4 | Senegal             |
+|    1 | Benin               |
+|   16 | Poland              |
+|   21 | United States       |
+|   20 | Scotland            |
+|    1 | Costa Rica          |
+|    9 | Canada              |
+|    4 | Ghana               |
+|    3 | Ukraine             |
+|    1 | Uganda              |
+|    5 | Netherlands         |
+|    5 | New Zealand         |
+|    6 | Northern Ireland    |
+|    1 | Belarus             |
+|   33 | Australia           |
+|    6 | Wales               |
+|    5 | Nigeria             |
+|    1 | Iceland             |
+|    1 | Antigua & Barbuda   |
+|    1 | Russia              |
+|    2 | Austria             |
+|    1 | Barbados            |
+|    2 | Estonia             |
+|    1 | Egypt               |
+|    2 | Albania             |
+|    1 | Mali                |
+|    1 | Greece              |
+|    1 | Iran                |
+|    1 | Korea Republic      |
+|    1 | Montenegro          |
+|    1 | Belize              |
+|    1 | South Sudan         |
+|    1 | St Kitts Nevis      |
++------+---------------------+
+75 rows in set (0.27 sec)
+
+mysql> select(*) from fifa where joined >="2018-05-20" and joined <="2019-04-10";
+mysql> Terminal close -- exit!
